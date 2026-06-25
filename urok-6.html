@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Эксклюзивный урок 6</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* Стили для страницы входа */
+      .login-container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        text-align: center;
+      }
+
+      .login-container h2 {
+        margin-bottom: 20px;
+        color: #2c3e50;
+      }
+
+      .login-container input {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+
+      .login-container input:focus {
+        border-color: #3498db;
+        outline: none;
+      }
+
+      .login-container button {
+        width: 100%;
+        padding: 12px;
+        background: #3498db;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .login-container button:hover {
+        background: #2980b9;
+      }
+
+      .error-message {
+        color: #e74c3c;
+        margin: 10px 0;
+        display: none;
+      }
+
+      .encrypted-content {
+        display: none;
+        /* Скрыто по умолчанию */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Защищённый контент (виден только после ввода пароля) -->
+    <div id="protected-content" class="encrypted-content">
+      <header>
+        <h1>🎯 Урок 6: Продвинутое программирование WeDo 2.0</h1>
+        <p><a href="index.html" style="color: #3498db">← На главную</a></p>
+      </header>
+
+      <section class="lesson-content">
+        <h2>Тема: Многозадачность и события</h2>
+
+        <div class="example-card">
+          <h3>🎯 Цель урока</h3>
+          <p>
+            Научиться создавать сложные программы с параллельными задачами и
+            обработкой событий.
+          </p>
+        </div>
+
+        <div class="example-card">
+          <h3>🧠 Что такое многозадачность?</h3>
+          <p>
+            Это способность робота выполнять несколько действий одновременно.
+            Например, одновременно:
+          </p>
+          <ul>
+            <li>Двигаться вперёд</li>
+            <li>Следить за датчиком движения</li>
+            <li>Воспроизводить звук</li>
+          </ul>
+        </div>
+
+        <div class="example-card">
+          <h3>📖 Структура программы</h3>
+          <div
+            style="
+              background: #2c3e50;
+              padding: 15px;
+              border-radius: 8px;
+              margin: 10px 0;
+              color: #ecf0f1;
+            "
+          >
+            <code>
+              Параллельно выполнять:<br />
+              ─── Задача 1: Двигаться вперёд<br />
+              ─── Задача 2: Если датчик видит объект → остановиться<br />
+              ─── Задача 3: Мигать светодиодом
+            </code>
+          </div>
+        </div>
+
+        <div class="example-card">
+          <h3>🔬 Эксперимент: "Интеллектуальный робот"</h3>
+          <ol>
+            <li>Собери робота с мотором и датчиком движения</li>
+            <li>
+              Создай параллельные задачи:
+              <ul>
+                <li><strong>Задача 1:</strong> Двигаться вперёд</li>
+                <li><strong>Задача 2:</strong> Мониторить датчик движения</li>
+                <li>
+                  <strong>Задача 3:</strong> При обнаружении объекта —
+                  остановиться
+                </li>
+              </ul>
+            </li>
+            <li>Проверь: робот едет, пока не увидит препятствие</li>
+          </ol>
+        </div>
+
+        <div class="example-card">
+          <h3>📝 Событийное программирование</h3>
+          <p>Событие — это действие, которое запускает программу. Например:</p>
+          <ul>
+            <li><strong>При старте</strong> → включить мотор</li>
+            <li><strong>При наклоне</strong> → изменить направление</li>
+            <li><strong>При обнаружении объекта</strong> → остановиться</li>
+          </ul>
+        </div>
+
+        <div class="example-card">
+          <h3>💡 Творческое задание</h3>
+          <p>Разработай программу для робота-помощника, который:</p>
+          <ul>
+            <li>Едет по комнате</li>
+            <li>Останавливается, если кто-то подходит</li>
+            <li>Издаёт приветственный звук</li>
+          </ul>
+        </div>
+
+        <div class="lesson-navigation">
+          <a href="urok-5.html">← Урок 5: Соревнование</a>
+        </div>
+      </section>
+
+      <footer>
+        <div class="footer-content">
+          <p>© 2023 WeDo 2.0 Образовательная платформа</p>
+          <p style="font-size: 0.9em; opacity: 0.8">
+            🎯 Урок 6: Продвинутое программирование
+          </p>
+          <p><a href="index.html" style="color: #89b4fa">На главную</a></p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Форма входа -->
+    <div id="login-form" class="login-container">
+      <h2>🔐 Доступ к уроку 6</h2>
+      <p style="color: #7f8c8d; margin-bottom: 20px">
+        Введите пароль, полученный на почту
+      </p>
+      <input type="password" id="passwordInput" placeholder="Введите пароль" />
+      <button onclick="checkPassword()">Войти</button>
+      <div id="errorMessage" class="error-message">
+        ❌ Неверный пароль. Попробуйте снова.
+      </div>
+    </div>
+
+    <script>
+      // Пароль для доступа к уроку (в реальном проекте генерируется на сервере)
+      const CORRECT_PASSWORD = "WeDo_Pro_2025!";
+
+      // Функция проверки пароля
+      function checkPassword() {
+        const input = document.getElementById("passwordInput");
+        const error = document.getElementById("errorMessage");
+        const loginForm = document.getElementById("login-form");
+        const content = document.getElementById("protected-content");
+
+        if (input.value === CORRECT_PASSWORD) {
+          // Пароль верный — показываем контент
+          loginForm.style.display = "none";
+          content.style.display = "block";
+          content.style.animation = "fadeIn 0.5s ease-out";
+          // Сохраняем в сессии, чтобы не запрашивать при обновлении
+          sessionStorage.setItem("lesson6_access", "true");
+        } else {
+          // Неверный пароль
+          error.style.display = "block";
+          input.value = "";
+          input.focus();
+          // Стираем через 3 секунды
+          setTimeout(() => {
+            error.style.display = "none";
+          }, 3000);
+        }
+      }
+
+      // Проверяем сессию при загрузке
+      window.onload = function () {
+        if (sessionStorage.getItem("lesson6_access") === "true") {
+          document.getElementById("login-form").style.display = "none";
+          document.getElementById("protected-content").style.display = "block";
+        }
+      };
+
+      // Обработка нажатия Enter
+      document
+        .getElementById("passwordInput")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            checkPassword();
+          }
+        });
+    </script>
+  </body>
+</html>

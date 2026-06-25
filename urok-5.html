@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WeDo 2.0: Урок 5 — Соревнование роботов</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>🏆 Урок 5: Соревнование роботов — "Кто быстрее?"</h1>
+      <p><a href="index.html" style="color: #3498db">← На главную</a></p>
+    </header>
+
+    <section class="lesson-content">
+      <h2>🏁 Итоговый проект: Гонка роботов</h2>
+
+      <div class="example-card">
+        <h3>🎯 Цель проекта</h3>
+        <p>
+          Построить и запрограммировать робота, который быстрее всех проедет
+          трассу. Победитель определяется временем прохождения дистанции!
+        </p>
+        <p>
+          🔥 <strong>Азарт — это двигатель прогресса!</strong> Соревнования
+          помогают детям учиться быстрее и с большим интересом.
+        </p>
+      </div>
+
+      <div class="example-card">
+        <h3>📐 Трасса</h3>
+        <p>Создай трассу на полу или столе:</p>
+        <ul>
+          <li><strong>Дистанция:</strong> 2-3 метра (или от стены до стены)</li>
+          <li>
+            <strong>Разметка:</strong> Стартовая и финишная линии (можно
+            использовать скотч)
+          </li>
+          <li>
+            <strong>Препятствия (опционально):</strong> Можно добавить змейку
+            или ворота для большего интереса
+          </li>
+        </ul>
+        <div
+          style="
+            background: #f0f4f8;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+          "
+        >
+          <strong>📏 Пример трассы:</strong><br />
+          [Старт] ——— 2 метра ——— [Финиш]
+        </div>
+      </div>
+
+      <div class="example-card">
+        <h3>🤖 Конструкция робота</h3>
+        <p>Базовая модель для гонки:</p>
+        <ul>
+          <li><strong>Шасси:</strong> Длинная балка с двумя осями</li>
+          <li>
+            <strong>Колёса:</strong> Большие (для скорости) или маленькие (для
+            мощности)
+          </li>
+          <li><strong>Мотор:</strong> Один мотор на заднюю ось (привод)</li>
+          <li><strong>SmartHub:</strong> Закрепить сверху для баланса</li>
+        </ul>
+        <p>
+          💡 <strong>Совет:</strong> Чем легче робот — тем он быстрее! Используй
+          минимальное количество деталей.
+        </p>
+      </div>
+
+      <div class="example-card">
+        <h3>📝 Программа для гонки</h3>
+        <p>Самый простой вариант — ехать прямо с полной мощностью:</p>
+        <div
+          style="
+            background: #2c3e50;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            color: #ecf0f1;
+          "
+        >
+          <code>
+            Запустить программу →<br />
+            Установить мощность 100% →<br />
+            Включить мотор →<br />
+            Ждать 3 секунды →<br />
+            Выключить мотор
+          </code>
+        </div>
+        <p>
+          ⏱️ <strong>Время:</strong> Экспериментально подбери время, чтобы робот
+          доехал до финиша.
+        </p>
+      </div>
+
+      <div class="example-card">
+        <h3>🔬 Тренировка</h3>
+        <ol>
+          <li>Собери базовую модель робота</li>
+          <li>Загрузи программу и запусти на трассе</li>
+          <li>Засеки время (например, с помощью секундомера на телефоне)</li>
+          <li>
+            Попробуй улучшить результат:
+            <ul>
+              <li>Измени мощность мотора</li>
+              <li>Поменяй колёса на большие</li>
+              <li>Оптимизируй вес</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+
+      <div class="example-card">
+        <h3>🏁 Правила соревнования</h3>
+        <ul>
+          <li><strong>Заезд:</strong> Каждый участник делает 3 попытки</li>
+          <li>
+            <strong>Лучшее время:</strong> Засчитывается лучший результат из
+            трёх
+          </li>
+          <li>
+            <strong>Фальстарт:</strong> Если робот стартует раньше — попытка
+            перезапускается
+          </li>
+          <li>
+            <strong>Победитель:</strong> Тот, чей робот проехал трассу за
+            минимальное время
+          </li>
+        </ul>
+        <p>
+          🏅 <strong>Награда:</strong> Можно сделать грамоту или медаль "Самый
+          быстрый робот"
+        </p>
+      </div>
+
+      <div class="example-card">
+        <h3>📊 Таблица результатов</h3>
+        <p>Заполни таблицу и следи за прогрессом:</p>
+        <table style="width: 100%; border-collapse: collapse; margin: 10px 0">
+          <thead>
+            <tr style="background: #3498db; color: white">
+              <th style="padding: 10px; border: 1px solid #ddd">Участник</th>
+              <th style="padding: 10px; border: 1px solid #ddd">Попытка 1</th>
+              <th style="padding: 10px; border: 1px solid #ddd">Попытка 2</th>
+              <th style="padding: 10px; border: 1px solid #ddd">Попытка 3</th>
+              <th style="padding: 10px; border: 1px solid #ddd">
+                Лучшее время
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 10px; border: 1px solid #ddd">Команда 1</td>
+              <td style="padding: 10px; border: 1px solid #ddd">_____ с</td>
+              <td style="padding: 10px; border: 1px solid #ddd">_____ с</td>
+              <td style="padding: 10px; border: 1px solid #ddd">_____ с</td>
+              <td style="padding: 10px; border: 1px solid #ddd">🏆 _____ с</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px; border: 1px solid #ddd">Команда 2</td>
+              <td style="padding: 10px; border: 1px solid #ddd">_____ с</td>
+              <td style="padding: 10px; border: 1px solid #ddd">_____ с</td>
+              <td style="padding: 10px; border: 1px solid #ddd">_____ с</td>
+              <td style="padding: 10px; border: 1px solid #ddd">🏆 _____ с</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px; border: 1px solid #ddd">Команда 3</td>
+              <td style="padding: 10px; border: 1px solid #ddd">_____ с</td>
+              <td style="padding: 10px; border: 1px solid #ddd">_____ с</td>
+              <td style="padding: 10px; border: 1px solid #ddd">_____ с</td>
+              <td style="padding: 10px; border: 1px solid #ddd">🏆 _____ с</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="example-card">
+        <h3>💡 Продвинутые идеи</h3>
+        <ul>
+          <li>
+            <strong>Датчик движения:</strong> Добавить остановку перед
+            препятствием
+          </li>
+          <li>
+            <strong>Змейка:</strong> Программируй повороты для объезда конусов
+          </li>
+          <li>
+            <strong>Турбо-режим:</strong> Используй передачу через шестерни для
+            увеличения скорости
+          </li>
+        </ul>
+      </div>
+
+      <div class="lesson-navigation">
+        <a href="urok-4.html">← Урок 4: Программирование</a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-content">
+        <p>© 2023 WeDo 2.0 Образовательная платформа</p>
+        <p style="font-size: 0.9em; opacity: 0.8">
+          🏆 Урок 5: Соревнование роботов
+        </p>
+        <p><a href="index.html" style="color: #89b4fa">На главную</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

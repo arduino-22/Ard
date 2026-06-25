@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Эксклюзивный урок 6</title>
+    <title>Урок 6: ESP8266 — Веб-сервер</title>
     <meta name="robots" content="noindex, nofollow" />
     <link rel="stylesheet" href="styles.css" />
     <style>
@@ -62,98 +62,295 @@
 
       .encrypted-content {
         display: none;
-        /* Скрыто по умолчанию */
+      }
+
+      /* Стили для кода */
+      .code-block {
+        background: #2c3e50;
+        color: #ecf0f1;
+        padding: 20px;
+        border-radius: 8px;
+        overflow-x: auto;
+        font-family: "Courier New", monospace;
+        font-size: 14px;
+        line-height: 1.6;
+        margin: 15px 0;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+
+      .code-block .comment {
+        color: #7f8c8d;
+      }
+      .code-block .keyword {
+        color: #e74c3c;
+      }
+      .code-block .string {
+        color: #f1c40f;
+      }
+      .code-block .function {
+        color: #3498db;
+      }
+
+      .step-card {
+        border-left: 4px solid #3498db;
+        padding: 15px 20px;
+        background: #f8f9fa;
+        border-radius: 4px;
+        margin: 15px 0;
+      }
+
+      .step-card h4 {
+        margin-top: 0;
+        color: #2c3e50;
+      }
+
+      .step-card .step-number {
+        display: inline-block;
+        background: #3498db;
+        color: white;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        text-align: center;
+        line-height: 28px;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .warning {
+        background: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 15px;
+        border-radius: 4px;
+        margin: 15px 0;
+      }
+
+      .warning strong {
+        color: #856404;
+      }
+
+      .success-box {
+        background: #d4edda;
+        border-left: 4px solid #28a745;
+        padding: 15px;
+        border-radius: 4px;
+        margin: 15px 0;
+      }
+
+      .success-box strong {
+        color: #155724;
       }
     </style>
   </head>
   <body>
-    <!-- Защищённый контент (виден только после ввода пароля) -->
+    <!-- ЗАЩИЩЁННЫЙ КОНТЕНТ (виден только после ввода пароля) -->
     <div id="protected-content" class="encrypted-content">
       <header>
-        <h1>🎯 Урок 6: Продвинутое программирование WeDo 2.0</h1>
+        <h1>🚀 Урок 6: Веб-сервер на ESP8266</h1>
         <p><a href="index.html" style="color: #3498db">← На главную</a></p>
       </header>
 
       <section class="lesson-content">
-        <h2>Тема: Многозадачность и события</h2>
+        <h2>Тема: Программирование ESP8266 и создание веб-сервера</h2>
 
         <div class="example-card">
           <h3>🎯 Цель урока</h3>
           <p>
-            Научиться создавать сложные программы с параллельными задачами и
-            обработкой событий.
+            Научиться программировать микроконтроллер ESP8266 и создать
+            собственный веб-сервер для управления устройствами через интернет.
           </p>
         </div>
 
         <div class="example-card">
-          <h3>🧠 Что такое многозадачность?</h3>
+          <h3>🧠 Что такое ESP8266?</h3>
           <p>
-            Это способность робота выполнять несколько действий одновременно.
-            Например, одновременно:
+            ESP8266 — это недорогой микроконтроллер с встроенным Wi-Fi. Он
+            позволяет создавать интернет-вещи (IoT) с минимальными затратами.
           </p>
           <ul>
-            <li>Двигаться вперёд</li>
-            <li>Следить за датчиком движения</li>
-            <li>Воспроизводить звук</li>
+            <li><strong>Процессор:</strong> 32-битный, 80 МГц</li>
+            <li><strong>Память:</strong> 4 МБ Flash</li>
+            <li><strong>Wi-Fi:</strong> 802.11 b/g/n</li>
+            <li><strong>Порты:</strong> GPIO, UART, I2C, SPI</li>
+            <li><strong>Цена:</strong> ~200-500 рублей</li>
           </ul>
-        </div>
-
-        <div class="example-card">
-          <h3>📖 Структура программы</h3>
-          <div
-            style="
-              background: #2c3e50;
-              padding: 15px;
-              border-radius: 8px;
-              margin: 10px 0;
-              color: #ecf0f1;
-            "
-          >
-            <code>
-              Параллельно выполнять:<br />
-              ─── Задача 1: Двигаться вперёд<br />
-              ─── Задача 2: Если датчик видит объект → остановиться<br />
-              ─── Задача 3: Мигать светодиодом
-            </code>
+          <div class="warning">
+            <strong>⚠️ Важно:</strong> ESP8266 работает с напряжением 3.3V, а не
+            5V! Не подключайте напрямую к 5V — это сожжёт микроконтроллер.
           </div>
         </div>
 
         <div class="example-card">
-          <h3>🔬 Эксперимент: "Интеллектуальный робот"</h3>
+          <h3>🔧 Установка Arduino IDE для ESP8266</h3>
+
+          <div class="step-card">
+            <h4><span class="step-number">1</span> Установите Arduino IDE</h4>
+            <p>
+              Скачайте с официального сайта:
+              <a href="https://www.arduino.cc/en/software" target="_blank"
+                >arduino.cc</a
+              >
+            </p>
+          </div>
+
+          <div class="step-card">
+            <h4>
+              <span class="step-number">2</span> Добавьте платформу ESP8266
+            </h4>
+            <p>
+              Откройте <strong>Файл → Настройки</strong> и в поле
+              <strong>Дополнительные ссылки для менеджера плат</strong>
+              вставьте:
+            </p>
+            <div class="code-block">
+              https://arduino.esp8266.com/stable/package_esp8266com_index.json
+            </div>
+          </div>
+
+          <div class="step-card">
+            <h4><span class="step-number">3</span> Установите пакет ESP8266</h4>
+            <p>
+              Перейдите в <strong>Инструменты → Плата → Менеджер плат</strong>,
+              найдите <strong>esp8266</strong> и установите.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <h4><span class="step-number">4</span> Подключите ESP8266</h4>
+            <p>
+              Подключите ESP8266 к компьютеру через USB-кабель. Выберите плату:
+              <strong>Инструменты → Плата → ESP8266 → NodeMCU 1.0</strong> (или
+              вашу модель).
+            </p>
+            <p>
+              Выберите порт: <strong>Инструменты → Порт</strong> (например, COM3
+              на Windows или /dev/ttyUSB0 на Linux).
+            </p>
+          </div>
+        </div>
+
+        <div class="example-card">
+          <h3>💻 Создание веб-сервера</h3>
+          <p>Вот базовый код для создания веб-сервера на ESP8266:</p>
+
+          <div class="code-block">
+            <span class="comment">// Подключаем библиотеки</span>
+            <span class="keyword">#include</span> &lt;ESP8266WiFi.h&gt;
+            <span class="keyword">#include</span> &lt;ESP8266WebServer.h&gt;
+
+            <span class="comment">// Настройки Wi-Fi (ЗАМЕНИ НА СВОИ!)</span>
+            <span class="keyword">const char</span>* ssid =
+            <span class="string">"Ваш_WiFi_SSID"</span>;
+            <span class="keyword">const char</span>* password =
+            <span class="string">"Ваш_пароль_WiFi"</span>;
+
+            <span class="comment">// Создаём сервер на порту 80</span>
+            ESP8266WebServer server(80);
+
+            <span class="keyword">void</span>
+            <span class="function">setup</span>() { Serial.begin(115200);
+            WiFi.begin(ssid, password);
+
+            <span class="comment">// Ждём подключения</span>
+            <span class="keyword">while</span> (WiFi.status() != WL_CONNECTED) {
+            delay(500); Serial.print(<span class="string">"."</span>); }
+            Serial.println(<span class="string">"Подключено!"</span>);
+            Serial.print(<span class="string">"IP-адрес: "</span>);
+            Serial.println(WiFi.localIP());
+
+            <span class="comment">// Обработчик для главной страницы</span>
+            server.on(<span class="string">"/"</span>,
+            <span class="function">handleRoot</span>); server.on(<span
+              class="string"
+              >"/on"</span
+            >, <span class="function">handleOn</span>); server.on(<span
+              class="string"
+              >"/off"</span
+            >, <span class="function">handleOff</span>); server.begin(); }
+
+            <span class="keyword">void</span>
+            <span class="function">loop</span>() { server.handleClient(); }
+
+            <span class="comment">// Страница с управлением светодиодом</span>
+            <span class="keyword">void</span>
+            <span class="function">handleRoot</span>() { String html =
+            <span class="string"
+              >"&lt;h1&gt;Управление светодиодом&lt;/h1&gt;"</span
+            >; html +=
+            <span class="string"
+              >"&lt;p&gt;&lt;a
+              href=\"/on\"&gt;Включить&lt;/a&gt;&lt;/p&gt;"</span
+            >; html +=
+            <span class="string"
+              >"&lt;p&gt;&lt;a
+              href=\"/off\"&gt;Выключить&lt;/a&gt;&lt;/p&gt;"</span
+            >; server.send(200, <span class="string">"text/html"</span>, html);
+            }
+
+            <span class="keyword">void</span>
+            <span class="function">handleOn</span>() { digitalWrite(LED_BUILTIN,
+            LOW);
+            <span class="comment">// Включаем светодиод</span> server.send(200,
+            <span class="string">"text/html"</span>,
+            <span class="string"
+              >"&lt;h1&gt;Светодиод ВКЛЮЧЕН&lt;/h1&gt;&lt;p&gt;&lt;a
+              href=\"/\"&gt;Назад&lt;/a&gt;&lt;/p&gt;"</span
+            >); }
+
+            <span class="keyword">void</span>
+            <span class="function">handleOff</span>() {
+            digitalWrite(LED_BUILTIN, HIGH);
+            <span class="comment">// Выключаем светодиод</span> server.send(200,
+            <span class="string">"text/html"</span>,
+            <span class="string"
+              >"&lt;h1&gt;Светодиод ВЫКЛЮЧЕН&lt;/h1&gt;&lt;p&gt;&lt;a
+              href=\"/\"&gt;Назад&lt;/a&gt;&lt;/p&gt;"</span
+            >); }
+          </div>
+
+          <div class="success-box">
+            <strong>✅ Готово!</strong> После загрузки кода, откройте в браузере
+            IP-адрес ESP8266, который появится в мониторе порта.
+          </div>
+        </div>
+
+        <div class="example-card">
+          <h3>🔬 Практическое задание</h3>
           <ol>
-            <li>Собери робота с мотором и датчиком движения</li>
             <li>
-              Создай параллельные задачи:
-              <ul>
-                <li><strong>Задача 1:</strong> Двигаться вперёд</li>
-                <li><strong>Задача 2:</strong> Мониторить датчик движения</li>
-                <li>
-                  <strong>Задача 3:</strong> При обнаружении объекта —
-                  остановиться
-                </li>
-              </ul>
+              <strong>Установите Arduino IDE</strong> и настройте для ESP8266
             </li>
-            <li>Проверь: робот едет, пока не увидит препятствие</li>
+            <li><strong>Подключите ESP8266</strong> к компьютеру</li>
+            <li><strong>Замените SSID и пароль</strong> в коде на свои</li>
+            <li><strong>Загрузите код</strong> в ESP8266</li>
+            <li><strong>Откройте</strong> IP-адрес в браузере</li>
+            <li><strong>Управляйте</strong> светодиодом через веб-страницу</li>
           </ol>
+          <p>
+            📌 <strong>Результат:</strong> Вы создали свой первый веб-сервер на
+            ESP8266!
+          </p>
         </div>
 
         <div class="example-card">
-          <h3>📝 Событийное программирование</h3>
-          <p>Событие — это действие, которое запускает программу. Например:</p>
+          <h3>🤖 Дополнительные идеи</h3>
           <ul>
-            <li><strong>При старте</strong> → включить мотор</li>
-            <li><strong>При наклоне</strong> → изменить направление</li>
-            <li><strong>При обнаружении объекта</strong> → остановиться</li>
-          </ul>
-        </div>
-
-        <div class="example-card">
-          <h3>💡 Творческое задание</h3>
-          <p>Разработай программу для робота-помощника, который:</p>
-          <ul>
-            <li>Едет по комнате</li>
-            <li>Останавливается, если кто-то подходит</li>
-            <li>Издаёт приветственный звук</li>
+            <li>
+              <strong>Добавьте датчик DHT22</strong> — показывайте температуру и
+              влажность
+            </li>
+            <li>
+              <strong>Подключите реле</strong> — управляйте реальными
+              устройствами (лампой, вентилятором)
+            </li>
+            <li>
+              <strong>Сделайте красивый интерфейс</strong> с CSS и кнопками
+            </li>
+            <li>
+              <strong>Добавьте авторизацию</strong> — только по паролю можно
+              управлять
+            </li>
           </ul>
         </div>
 
@@ -166,18 +363,18 @@
         <div class="footer-content">
           <p>© 2023 WeDo 2.0 Образовательная платформа</p>
           <p style="font-size: 0.9em; opacity: 0.8">
-            🎯 Урок 6: Продвинутое программирование
+            🚀 Урок 6: ESP8266 — Веб-сервер
           </p>
           <p><a href="index.html" style="color: #89b4fa">На главную</a></p>
         </div>
       </footer>
     </div>
 
-    <!-- Форма входа -->
+    <!-- ФОРМА ВХОДА -->
     <div id="login-form" class="login-container">
-      <h2>🔐 Доступ к уроку 6</h2>
+      <h2>🔐 Эксклюзивный урок 6</h2>
       <p style="color: #7f8c8d; margin-bottom: 20px">
-        Введите пароль, полученный на почту
+        Введите пароль, полученный от учителя
       </p>
       <input type="password" id="passwordInput" placeholder="Введите пароль" />
       <button onclick="checkPassword()">Войти</button>
@@ -187,10 +384,9 @@
     </div>
 
     <script>
-      // Пароль для доступа к уроку (в реальном проекте генерируется на сервере)
-      const CORRECT_PASSWORD = "WeDo_Pro_2025!";
+      // === ПАРОЛЬ ДЛЯ ДОСТУПА (изменить на свой) ===
+      const CORRECT_PASSWORD = "ESP8266_Pro_2025!";
 
-      // Функция проверки пароля
       function checkPassword() {
         const input = document.getElementById("passwordInput");
         const error = document.getElementById("errorMessage");
@@ -198,25 +394,21 @@
         const content = document.getElementById("protected-content");
 
         if (input.value === CORRECT_PASSWORD) {
-          // Пароль верный — показываем контент
           loginForm.style.display = "none";
           content.style.display = "block";
           content.style.animation = "fadeIn 0.5s ease-out";
-          // Сохраняем в сессии, чтобы не запрашивать при обновлении
           sessionStorage.setItem("lesson6_access", "true");
         } else {
-          // Неверный пароль
           error.style.display = "block";
           input.value = "";
           input.focus();
-          // Стираем через 3 секунды
           setTimeout(() => {
             error.style.display = "none";
           }, 3000);
         }
       }
 
-      // Проверяем сессию при загрузке
+      // Проверка сессии при загрузке
       window.onload = function () {
         if (sessionStorage.getItem("lesson6_access") === "true") {
           document.getElementById("login-form").style.display = "none";

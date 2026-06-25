@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Панель учителя — Управление доступом</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .teacher-panel {
+        max-width: 700px;
+        margin: 30px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .teacher-panel h1 {
+        color: #2c3e50;
+        text-align: center;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 15px;
+      }
+
+      .teacher-panel h2 {
+        color: #2c3e50;
+        margin-top: 30px;
+      }
+
+      .generated-password {
+        font-size: 28px;
+        font-weight: bold;
+        text-align: center;
+        padding: 20px;
+        background: linear-gradient(135deg, #f0f4f8, #e8edf2);
+        border-radius: 8px;
+        margin: 15px 0;
+        letter-spacing: 3px;
+        font-family: monospace;
+        user-select: all;
+        border: 2px dashed #3498db;
+      }
+
+      .teacher-panel button {
+        padding: 12px 25px;
+        background: #3498db;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        margin: 5px;
+      }
+
+      .teacher-panel button:hover {
+        background: #2980b9;
+      }
+
+      .teacher-panel button.copy-btn {
+        background: #27ae60;
+      }
+
+      .teacher-panel button.copy-btn:hover {
+        background: #219a52;
+      }
+
+      .teacher-panel button.send-btn {
+        background: #e67e22;
+      }
+
+      .teacher-panel button.send-btn:hover {
+        background: #d35400;
+      }
+
+      .history-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+      }
+
+      .history-table th {
+        background: #2c3e50;
+        color: white;
+        padding: 10px;
+        text-align: left;
+      }
+
+      .history-table td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .history-table tr:hover {
+        background: #f0f4f8;
+      }
+
+      .student-input {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        box-sizing: border-box;
+        margin: 10px 0;
+      }
+
+      .student-input:focus {
+        border-color: #3498db;
+        outline: none;
+      }
+
+      .status-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      .status-badge.active {
+        background: #27ae60;
+        color: white;
+      }
+
+      .status-badge.used {
+        background: #95a5a6;
+        color: white;
+      }
+
+      .alert {
+        padding: 15px;
+        background: #fff8e1;
+        border-left: 4px solid #f39c12;
+        border-radius: 4px;
+        margin: 15px 0;
+      }
+
+      .alert strong {
+        color: #e67e22;
+      }
+
+      .email-form {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 15px 0;
+      }
+
+      .email-form input {
+        width: 70%;
+        padding: 10px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        margin-right: 10px;
+      }
+
+      .email-form input:focus {
+        border-color: #3498db;
+        outline: none;
+      }
+
+      @media (max-width: 600px) {
+        .email-form input {
+          width: 100%;
+          margin-bottom: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="teacher-panel">
+      <h1>👨‍🏫 Панель учителя</h1>
+      <p style="text-align: center; color: #7f8c8d;">Управление доступом к эксклюзивным урокам</p>
+
+      <!-- Генерация пароля -->
+      <h2>🔑 Сгенерировать пароль</h2>
+      <div class="alert">
+        <strong>📌 Для ученика:</strong> Сгенерируйте пароль и отправьте его ученику. Пароль действует
+        до закрытия браузера.
+      </div>
+
+      <div class="generated-password" id="currentPassword">Нажмите "Сгенерировать"</div>
+
+      <div style="text-align: center;">
+        <button onclick="generatePassword()">🔄 Сгенерировать</button>
+        <button class="copy-btn" onclick="copyPassword()">📋 Скопировать</button>
+      </div>
+
+      <!-- Отправка на почту -->
+      <h2>📧 Отправить пароль на почту</h2>
+      <div class="email-form">
+        <input type="email" id="studentEmail" placeholder="Email ученика (например, student@gmail.com)" />
+        <button class="send-btn" onclick="sendPasswordToEmail()">✉️ Отправить</button>
+        <p style="font-size: 0.9em; color: #7f8c8d; margin-top: 5px;">
+          ⚠️ Для реальной отправки почты нужен серверный бекенд. Сейчас это просто демонстрация.
+        </p>
+      </div>
+
+      <!-- История паролей -->
+      <h2>📜 История паролей</h2>
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>Пароль</th>
+            <th>Ученик</th>
+            <th>Дата создания</th>
+            <th>Статус</th>
+          </tr>
+        </thead>
+        <tbody id="historyBody">
+          <tr>
+            <td colspan="4" style="text-align: center; color: #7f8c8d;">Паролей пока нет</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top: 20px; text-align: center; font-size: 0.9em; color: #7f8c8d;">
+        <p>💡 <strong>Совет:</strong> Пароли сохраняются только в вашем браузере. Для постоянного хранения нужна база данных.</p>
+        <p><a href="index.html" style="color: #3498db;">← На главную</a></p>
+      </div>
+    </div>
+
+    <script>
+      // Хранилище паролей (в localStorage)
+      let passwordsHistory = JSON.parse(localStorage.getItem("passwordsHistory")) || [];
+
+      // Текущий пароль
+      let currentPassword = "";
+
+      // Генерация пароля
+      function generatePassword() {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+        let password = "";
+        for (let i = 0; i < 12; i++) {
+          password += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        currentPassword = password;
+        document.getElementById("currentPassword").textContent = password;
+        updateHistory(password);
+      }
+
+      // Копирование пароля
+      function copyPassword() {
+        if (currentPassword && currentPassword !== "Нажмите 'Сгенерировать'") {
+          navigator.clipboard.writeText(currentPassword).then(() => {
+            alert("✅ Пароль скопирован!");
+          });
+        } else {
+          alert("❌ Сначала сгенерируйте пароль!");
+        }
+      }
+
+      // Отправка на почту (демо-версия)
+      function sendPasswordToEmail() {
+        const email = document.getElementById("studentEmail").value;
+        if (!email) {
+          alert("❌ Введите email ученика!");
+          return;
+        }
+
+        if (!currentPassword || currentPassword === "Нажмите 'Сгенерировать'") {
+          alert("❌ Сначала сгенерируйте пароль!");
+          return;
+        }
+
+        // В реальности здесь был бы AJAX-запрос на сервер
+        alert(
+          `✉️ Пароль "${currentPassword}" отправлен на ${email}\n\n` +
+          `(В реальном проекте нужно настроить серверную отправку писем)`
+        );
+
+        // Обновляем статус в истории
+        updateHistory(currentPassword, email);
+      }
+
+      // Обновление истории
+      function updateHistory(password, email = "") {
+        const now = new Date();
+        const dateStr = now.toLocaleString("ru-RU");
+
+        // Проверяем, есть ли уже такой пароль
+        const exists = passwordsHistory.find(p => p.password === password);
+        if (!exists) {
+          passwordsHistory.push({
+            password: password,
+            email: email || "не указан",
+            date: dateStr,
+            used: false
+          });
+        } else if (email) {
+          // Обновляем email, если он был передан
+          exists.email = email;
+        }
+
+        localStorage.setItem("passwordsHistory", JSON.stringify(passwordsHistory));
+        renderHistory();
+      }
+
+      // Отображение истории
+      function renderHistory() {
+        const tbody = document.getElementById("historyBody");
+
+        if (passwordsHistory.length === 0) {
+          tbody.innerHTML =
+            `<tr><td colspan="4" style="text-align: center; color: #7f8c8d;">Паролей пока нет</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = passwordsHistory.map(item => `
+          <tr>
+            <td><code>${item.password}</code></td>
+            <td>${item.email}</td>
+            <td>${item.date}</td>
+            <td><span class="status-badge ${item.used ? 'used' : 'active'}">${item.used ? '✅ Использован' : '🟢 Активен'}</span></td>
+          </tr>
+        `).join("");
+      }
+
+      // Загружаем историю при открытии страницы
+      renderHistory();
+
+      // Обработка Enter в поле email
+      document.getElementById("studentEmail").addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {
+          sendPasswordToEmail();
+        }
+      });
+    </script>
+  </body>
+</html>

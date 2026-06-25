@@ -7,112 +7,8 @@
 
     <!-- Подключаем внешний CSS файл -->
     <link rel="stylesheet" href="styles.css" />
-
-    <style>
-      /* Базовые стили */
-      :root {
-        --primary-color: #2c3e50;
-        --secondary-color: #3498db;
-      }
-
-      body {
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-      }
-
-      /* Адаптивные изображения */
-      img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        margin: 15px 0;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-      }
-
-      img:hover {
-        transform: scale(1.02);
-      }
-
-      /* Карточки с анимацией */
-      .example-card {
-        border: 1px solid #ddd;
-        padding: 15px;
-        margin: 20px 0;
-        border-radius: 8px;
-        background: white;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        transition: box-shadow 0.3s ease;
-        animation: fadeIn 0.5s ease-out;
-      }
-
-      .example-card:hover {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      }
-
-      /* Адаптивные медиа-запросы */
-      @media (max-width: 768px) {
-        body {
-          padding: 10px;
-          font-size: 14px;
-        }
-
-        h1 {
-          font-size: 24px;
-        }
-
-        h2 {
-          font-size: 20px;
-        }
-
-        .example-card {
-          margin: 10px 0;
-          padding: 10px;
-        }
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* Улучшенный футер */
-      footer {
-        margin-top: 40px;
-        padding: 20px;
-        background: var(--primary-color);
-        color: white;
-        text-align: center;
-        border-radius: 8px;
-      }
-
-      footer p {
-        margin: 5px 0;
-      }
-
-      /* Стили для списков */
-      ul {
-        padding-left: 20px;
-      }
-
-      li {
-        margin: 8px 0;
-      }
-    </style>
   </head>
   <body>
-    <!-- Остальное содержимое без изменений -->
     <header>
       <h1>WeDo 2.0: Стартовые проекты для новичков</h1>
       <p>
@@ -189,7 +85,6 @@
             alt="ventilyator"
             srcset="./img/ventilyator.jpg 800w, ./img/bot.png 500w"
           /><br />
-          <!-- Поисковый запрос: "WeDo 2.0 Fan project"<br> -->
           Особенности: Использование редукции для изменения скорости вращения.
         </div>
       </div>
@@ -223,17 +118,39 @@
       </ul>
     </section>
 
+    <!-- МОДЕРНИЗИРОВАННЫЙ ФУТЕР -->
     <footer>
-      <p>
-        © 2023 WeDo 2.0 Образовательная платформа. Для некоммерческого
-        использования.
-      </p>
-      <p>Контакты: support@wedo-learning.ru</p>
-      <form action="https://formspree.io/f/ваш-id" method="POST">
-        <input type="email" name="email" placeholder="Ваш email" required />
-        <textarea name="message" placeholder="Сообщение" required></textarea>
-        <button type="submit">Отправить</button>
-      </form>
+      <div class="footer-content">
+        <!-- Навигация по урокам -->
+        <nav class="lesson-nav">
+          <h4>📚 Уроки</h4>
+          <ul>
+            <li><a href="urok-1.html">Урок 1: Знакомство</a></li>
+            <li><a href="urok-2.html">Урок 2: Моторы</a></li>
+            <li><a href="urok-3.html">Урок 3: Датчики</a></li>
+            <li><a href="urok-4.html">Урок 4: Программирование</a></li>
+            <li><a href="urok-5.html">Урок 5: Проект</a></li>
+            <li>
+              <a href="urok-6.html">Урок 6: Продвинутый (эксклюзив) 🔐</a>
+            </li>
+            <li><a href="teacher-panel.html">👨‍🏫 Панель учителя</a></li>
+          </ul>
+        </nav>
+
+        <hr class="footer-divider" />
+
+        <p>© 2023 WeDo 2.0 Образовательная платформа</p>
+        <p>Для некоммерческого использования</p>
+        <p style="font-size: 0.9em; opacity: 0.8">
+          📧 Контакты: support@wedo-learning.ru
+        </p>
+
+        <form action="https://formspree.io/f/ваш-id" method="POST">
+          <input type="email" name="email" placeholder="Ваш email" required />
+          <textarea name="message" placeholder="Сообщение" required></textarea>
+          <button type="submit">✉️ Отправить</button>
+        </form>
+      </div>
     </footer>
   </body>
 </html>

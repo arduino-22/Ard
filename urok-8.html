@@ -81,7 +81,7 @@
         padding: 20px;
         border-radius: 8px;
         overflow-x: auto;
-        font-family: 'Courier New', monospace;
+        font-family: "Courier New", monospace;
         font-size: 14px;
         line-height: 1.7;
         margin: 15px 0;
@@ -197,7 +197,9 @@
         color: white;
         border-radius: 8px;
         text-decoration: none;
-        transition: background 0.3s ease, transform 0.3s ease;
+        transition:
+          background 0.3s ease,
+          transform 0.3s ease;
       }
       .lesson-navigation a:hover {
         background: #2980b9;
@@ -212,21 +214,28 @@
     </style>
   </head>
   <body>
-
     <!-- ============================================================ -->
     <!-- ЗАЩИЩЁННЫЙ КОНТЕНТ -->
     <!-- ============================================================ -->
     <div id="protected-content" class="encrypted-content">
       <header>
         <h1>📡 Урок 8: Связь между двумя ESP8266</h1>
-        <p><a href="index.html" style="color: #3498db;">← На главную</a></p>
+        <p><a href="index.html" style="color: #3498db">← На главную</a></p>
       </header>
 
       <section class="lesson-content">
         <div class="example-card">
           <h3>🎯 Цель урока</h3>
-          <p>Настроить <strong>прямую связь</strong> между двумя ESP8266 без роутера — одна плата работает как точка доступа (AP), вторая как клиент (STA).</p>
-          <p>Это основа для создания <strong>беспроводных сенсорных сетей</strong>, пультов управления и робототехнических систем.</p>
+          <p>
+            Настроить <strong>прямую связь</strong> между двумя ESP8266 без
+            роутера — одна плата работает как точка доступа (AP), вторая как
+            клиент (STA).
+          </p>
+          <p>
+            Это основа для создания
+            <strong>беспроводных сенсорных сетей</strong>, пультов управления и
+            робототехнических систем.
+          </p>
         </div>
 
         <div class="diagram">
@@ -236,7 +245,9 @@
         </div>
 
         <div class="warning">
-          <strong>⚠️ Важно:</strong> Для этого урока нужны <strong>две платы ESP8266</strong>, USB-кабели и компьютер с Arduino IDE.
+          <strong>⚠️ Важно:</strong> Для этого урока нужны
+          <strong>две платы ESP8266</strong>, USB-кабели и компьютер с Arduino
+          IDE.
         </div>
 
         <!-- ========================================================== -->
@@ -246,82 +257,111 @@
           <h3>📡 Скетч 1: ESP8266 #1 — Точка доступа (сервер)</h3>
           <p>Эта плата создаёт Wi-Fi сеть и ждёт подключения клиента.</p>
 
-          <button class="copy-btn" onclick="copySketch1()">📋 Скопировать скетч #1</button>
+          <button class="copy-btn" onclick="copySketch1()">
+            📋 Скопировать скетч #1
+          </button>
 
           <div class="code-block" id="sketch1">
-<span class="comment">/*
-  ============================================================
-  Урок 8: ESP8266 #1 — Точка доступа (AP + сервер)
-  ============================================================
-  Эта плата создаёт Wi-Fi сеть "ESP8266_Link" и ждёт
-  подключения клиента. При получении данных — отвечает.
-  ============================================================
-*/</span>
+            <span class="comment"
+              >/* ============================================================
+              Урок 8: ESP8266 #1 — Точка доступа (AP + сервер)
+              ============================================================ Эта
+              плата создаёт Wi-Fi сеть "ESP8266_Link" и ждёт подключения
+              клиента. При получении данных — отвечает.
+              ============================================================
+              */</span
+            >
 
-<span class="preprocessor">#include &lt;ESP8266WiFi.h&gt;
-#include &lt;ESP8266WebServer.h&gt;</span>
+            <span class="preprocessor"
+              >#include &lt;ESP8266WiFi.h&gt; #include
+              &lt;ESP8266WebServer.h&gt;</span
+            >
 
-<span class="comment">// ===== НАСТРОЙКИ ТОЧКИ ДОСТУПА =====</span>
-<span class="keyword">const char</span>* ap_ssid     = <span class="string">"ESP8266_Link"</span>;
-<span class="keyword">const char</span>* ap_password = <span class="string">"12345678"</span>;
+            <span class="comment">// ===== НАСТРОЙКИ ТОЧКИ ДОСТУПА =====</span>
+            <span class="keyword">const char</span>* ap_ssid =
+            <span class="string">"ESP8266_Link"</span>;
+            <span class="keyword">const char</span>* ap_password =
+            <span class="string">"12345678"</span>;
 
-<span class="comment">// ===== СОЗДАЁМ СЕРВЕР =====</span>
-ESP8266WebServer server(<span class="number">80</span>);
+            <span class="comment">// ===== СОЗДАЁМ СЕРВЕР =====</span>
+            ESP8266WebServer server(<span class="number">80</span>);
 
-<span class="comment">// ===== ОБРАБОТЧИК ЗАПРОСА =====</span>
-<span class="keyword">void</span> <span class="function">handleData</span>() {
-  <span class="keyword">String</span> message = server.arg(<span class="string">"msg"</span>);
+            <span class="comment">// ===== ОБРАБОТЧИК ЗАПРОСА =====</span>
+            <span class="keyword">void</span>
+            <span class="function">handleData</span>() {
+            <span class="keyword">String</span> message = server.arg(<span
+              class="string"
+              >"msg"</span
+            >);
 
-  <span class="keyword">if</span> (message == <span class="string">""</span>) {
-    server.send(<span class="number">200</span>, <span class="string">"text/plain"</span>, <span class="string">"Привет! Отправь данные через ?msg=текст"</span>);
-    <span class="keyword">return</span>;
-  }
+            <span class="keyword">if</span> (message ==
+            <span class="string">""</span>) { server.send(<span class="number"
+              >200</span
+            >, <span class="string">"text/plain"</span>,
+            <span class="string">"Привет! Отправь данные через ?msg=текст"</span
+            >); <span class="keyword">return</span>; }
 
-  <span class="comment">// Выводим полученное сообщение в монитор порта</span>
-  Serial.print(<span class="string">"📩 Получено: "</span>);
-  Serial.println(message);
+            <span class="comment"
+              >// Выводим полученное сообщение в монитор порта</span
+            >
+            Serial.print(<span class="string">"📩 Получено: "</span>);
+            Serial.println(message);
 
-  <span class="comment">// Отправляем ответ</span>
-  <span class="keyword">String</span> response = <span class="string">"✅ Получено: "</span> + message;
-  server.send(<span class="number">200</span>, <span class="string">"text/plain"</span>, response);
-}
+            <span class="comment">// Отправляем ответ</span>
+            <span class="keyword">String</span> response =
+            <span class="string">"✅ Получено: "</span> + message;
+            server.send(<span class="number">200</span>,
+            <span class="string">"text/plain"</span>, response); }
 
-<span class="comment">// ===== ГЛАВНАЯ СТРАНИЦА =====</span>
-<span class="keyword">void</span> <span class="function">handleRoot</span>() {
-  <span class="keyword">String</span> html = <span class="string">"&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='UTF-8'&gt;&lt;title&gt;ESP8266 Сервер&lt;/title&gt;&lt;/head&gt;&lt;body&gt;"</span>;
-  html += <span class="string">"&lt;h1&gt;📡 ESP8266 #1 (Сервер)&lt;/h1&gt;"</span>;
-  html += <span class="string">"&lt;p&gt;Ожидаю данные от клиента...&lt;/p&gt;"</span>;
-  html += <span class="string">"&lt;p&gt;Пример запроса: &lt;code&gt;/data?msg=Привет&lt;/code&gt;&lt;/p&gt;"</span>;
-  html += <span class="string">"&lt;/body&gt;&lt;/html&gt;"</span>;
-  server.send(<span class="number">200</span>, <span class="string">"text/html"</span>, html);
-}
+            <span class="comment">// ===== ГЛАВНАЯ СТРАНИЦА =====</span>
+            <span class="keyword">void</span>
+            <span class="function">handleRoot</span>() {
+            <span class="keyword">String</span> html =
+            <span class="string"
+              >"&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta
+              charset='UTF-8'&gt;&lt;title&gt;ESP8266
+              Сервер&lt;/title&gt;&lt;/head&gt;&lt;body&gt;"</span
+            >; html +=
+            <span class="string"
+              >"&lt;h1&gt;📡 ESP8266 #1 (Сервер)&lt;/h1&gt;"</span
+            >; html +=
+            <span class="string"
+              >"&lt;p&gt;Ожидаю данные от клиента...&lt;/p&gt;"</span
+            >; html +=
+            <span class="string"
+              >"&lt;p&gt;Пример запроса:
+              &lt;code&gt;/data?msg=Привет&lt;/code&gt;&lt;/p&gt;"</span
+            >; html += <span class="string">"&lt;/body&gt;&lt;/html&gt;"</span>;
+            server.send(<span class="number">200</span>,
+            <span class="string">"text/html"</span>, html); }
 
-<span class="comment">// ===== SETUP =====</span>
-<span class="keyword">void</span> <span class="function">setup</span>() {
-  Serial.begin(<span class="number">115200</span>);
-  delay(<span class="number">100</span>);
+            <span class="comment">// ===== SETUP =====</span>
+            <span class="keyword">void</span>
+            <span class="function">setup</span>() { Serial.begin(<span
+              class="number"
+              >115200</span
+            >); delay(<span class="number">100</span>);
 
-  <span class="comment">// Создаём точку доступа</span>
-  WiFi.softAP(ap_ssid, ap_password);
-  Serial.println(<span class="string">"✅ Точка доступа создана"</span>);
-  Serial.print(<span class="string">"📡 SSID: "</span>);
-  Serial.println(ap_ssid);
-  Serial.print(<span class="string">"🔑 Пароль: "</span>);
-  Serial.println(ap_password);
-  Serial.print(<span class="string">"📡 IP-адрес сервера: "</span>);
-  Serial.println(WiFi.softAPIP());
+            <span class="comment">// Создаём точку доступа</span>
+            WiFi.softAP(ap_ssid, ap_password); Serial.println(<span
+              class="string"
+              >"✅ Точка доступа создана"</span
+            >); Serial.print(<span class="string">"📡 SSID: "</span>);
+            Serial.println(ap_ssid); Serial.print(<span class="string"
+              >"🔑 Пароль: "</span
+            >); Serial.println(ap_password); Serial.print(<span class="string"
+              >"📡 IP-адрес сервера: "</span
+            >); Serial.println(WiFi.softAPIP());
 
-  <span class="comment">// Настройка маршрутов</span>
-  server.on(<span class="string">"/"</span>, handleRoot);
-  server.on(<span class="string">"/data"</span>, handleData);
+            <span class="comment">// Настройка маршрутов</span>
+            server.on(<span class="string">"/"</span>, handleRoot);
+            server.on(<span class="string">"/data"</span>, handleData);
+            server.begin(); Serial.println(<span class="string"
+              >"🚀 Сервер запущен!"</span
+            >); }
 
-  server.begin();
-  Serial.println(<span class="string">"🚀 Сервер запущен!"</span>);
-}
-
-<span class="keyword">void</span> <span class="function">loop</span>() {
-  server.handleClient();
-}
+            <span class="keyword">void</span>
+            <span class="function">loop</span>() { server.handleClient(); }
           </div>
         </div>
 
@@ -330,92 +370,117 @@ ESP8266WebServer server(<span class="number">80</span>);
         <!-- ========================================================== -->
         <div class="example-card">
           <h3>📡 Скетч 2: ESP8266 #2 — Клиент</h3>
-          <p>Эта плата подключается к точке доступа и отправляет данные на сервер.</p>
+          <p>
+            Эта плата подключается к точке доступа и отправляет данные на
+            сервер.
+          </p>
 
-          <button class="copy-btn" onclick="copySketch2()">📋 Скопировать скетч #2</button>
+          <button class="copy-btn" onclick="copySketch2()">
+            📋 Скопировать скетч #2
+          </button>
 
           <div class="code-block" id="sketch2">
-<span class="comment">/*
-  ============================================================
-  Урок 8: ESP8266 #2 — Клиент
-  ============================================================
-  Эта плата подключается к точке доступа "ESP8266_Link"
-  и отправляет данные на сервер (ESP8266 #1).
-  ============================================================
-*/</span>
+            <span class="comment"
+              >/* ============================================================
+              Урок 8: ESP8266 #2 — Клиент
+              ============================================================ Эта
+              плата подключается к точке доступа "ESP8266_Link" и отправляет
+              данные на сервер (ESP8266 #1).
+              ============================================================
+              */</span
+            >
 
-<span class="preprocessor">#include &lt;ESP8266WiFi.h&gt;</span>
+            <span class="preprocessor">#include &lt;ESP8266WiFi.h&gt;</span>
 
-<span class="comment">// ===== НАСТРОЙКИ ПОДКЛЮЧЕНИЯ =====</span>
-<span class="keyword">const char</span>* ssid     = <span class="string">"ESP8266_Link"</span>;
-<span class="keyword">const char</span>* password = <span class="string">"12345678"</span>;
+            <span class="comment">// ===== НАСТРОЙКИ ПОДКЛЮЧЕНИЯ =====</span>
+            <span class="keyword">const char</span>* ssid =
+            <span class="string">"ESP8266_Link"</span>;
+            <span class="keyword">const char</span>* password =
+            <span class="string">"12345678"</span>;
 
-<span class="comment">// IP-адрес сервера (ESP8266 #1)</span>
-<span class="keyword">const char</span>* serverIP = <span class="string">"192.168.4.1"</span>;
+            <span class="comment">// IP-адрес сервера (ESP8266 #1)</span>
+            <span class="keyword">const char</span>* serverIP =
+            <span class="string">"192.168.4.1"</span>;
 
-<span class="comment">// ===== ОТПРАВКА ДАННЫХ =====</span>
-<span class="keyword">void</span> <span class="function">sendData</span>(<span class="keyword">String</span> message) {
-  WiFiClient client;
+            <span class="comment">// ===== ОТПРАВКА ДАННЫХ =====</span>
+            <span class="keyword">void</span>
+            <span class="function">sendData</span>(<span class="keyword"
+              >String</span
+            >
+            message) { WiFiClient client;
 
-  <span class="keyword">if</span> (!client.connect(serverIP, <span class="number">80</span>)) {
-    Serial.println(<span class="string">"❌ Ошибка подключения к серверу"</span>);
-    <span class="keyword">return</span>;
-  }
+            <span class="keyword">if</span> (!client.connect(serverIP,
+            <span class="number">80</span>)) { Serial.println(<span
+              class="string"
+              >"❌ Ошибка подключения к серверу"</span
+            >); <span class="keyword">return</span>; }
 
-  <span class="comment">// Формируем HTTP-запрос</span>
-  <span class="keyword">String</span> url = <span class="string">"/data?msg="</span> + message;
-  client.print(<span class="keyword">String</span>(<span class="string">"GET "</span>) + url + <span class="string">" HTTP/1.1\r\n"</span>);
-  client.print(<span class="keyword">String</span>(<span class="string">"Host: "</span>) + serverIP + <span class="string">"\r\n"</span>);
-  client.print(<span class="string">"Connection: close\r\n\r\n"</span>);
+            <span class="comment">// Формируем HTTP-запрос</span>
+            <span class="keyword">String</span> url =
+            <span class="string">"/data?msg="</span> + message;
+            client.print(<span class="keyword">String</span>(<span
+              class="string"
+              >"GET "</span
+            >) + url + <span class="string">" HTTP/1.1\r\n"</span>);
+            client.print(<span class="keyword">String</span>(<span
+              class="string"
+              >"Host: "</span
+            >) + serverIP + <span class="string">"\r\n"</span>);
+            client.print(<span class="string">"Connection: close\r\n\r\n"</span
+            >);
 
-  <span class="comment">// Ждём ответ</span>
-  <span class="keyword">unsigned</span> <span class="keyword">long</span> timeout = millis() + <span class="number">5000</span>;
-  <span class="keyword">while</span> (client.available() == <span class="number">0</span>) {
-    <span class="keyword">if</span> (millis() &gt; timeout) {
-      Serial.println(<span class="string">"❌ Таймаут ожидания ответа"</span>);
-      client.stop();
-      <span class="keyword">return</span>;
-    }
-  }
+            <span class="comment">// Ждём ответ</span>
+            <span class="keyword">unsigned</span>
+            <span class="keyword">long</span> timeout = millis() +
+            <span class="number">5000</span>;
+            <span class="keyword">while</span> (client.available() ==
+            <span class="number">0</span>) {
+            <span class="keyword">if</span> (millis() &gt; timeout) {
+            Serial.println(<span class="string"
+              >"❌ Таймаут ожидания ответа"</span
+            >); client.stop(); <span class="keyword">return</span>; } }
 
-  <span class="comment">// Читаем ответ</span>
-  <span class="keyword">while</span> (client.available()) {
-    <span class="keyword">String</span> line = client.readStringUntil(<span class="string">'\r'</span>);
-    Serial.println(line);
-  }
+            <span class="comment">// Читаем ответ</span>
+            <span class="keyword">while</span> (client.available()) {
+            <span class="keyword">String</span> line =
+            client.readStringUntil(<span class="string">'\r'</span>);
+            Serial.println(line); } client.stop(); Serial.println(<span
+              class="string"
+              >"✅ Отправлено: "</span
+            >
+            + message); }
 
-  client.stop();
-  Serial.println(<span class="string">"✅ Отправлено: "</span> + message);
-}
+            <span class="comment">// ===== SETUP =====</span>
+            <span class="keyword">void</span>
+            <span class="function">setup</span>() { Serial.begin(<span
+              class="number"
+              >115200</span
+            >); delay(<span class="number">100</span>);
 
-<span class="comment">// ===== SETUP =====</span>
-<span class="keyword">void</span> <span class="function">setup</span>() {
-  Serial.begin(<span class="number">115200</span>);
-  delay(<span class="number">100</span>);
+            <span class="comment">// Подключаемся к точке доступа</span>
+            Serial.print(<span class="string">"Подключение к "</span>);
+            Serial.println(ssid); WiFi.begin(ssid, password);
 
-  <span class="comment">// Подключаемся к точке доступа</span>
-  Serial.print(<span class="string">"Подключение к "</span>);
-  Serial.println(ssid);
-  WiFi.begin(ssid, password);
+            <span class="keyword">while</span> (WiFi.status() != WL_CONNECTED) {
+            delay(<span class="number">500</span>); Serial.print(<span
+              class="string"
+              >"."</span
+            >); } Serial.println(<span class="string">"\n✅ Подключено!"</span
+            >); Serial.print(<span class="string">"📡 IP-адрес клиента: "</span
+            >); Serial.println(WiFi.localIP());
 
-  <span class="keyword">while</span> (WiFi.status() != WL_CONNECTED) {
-    delay(<span class="number">500</span>);
-    Serial.print(<span class="string">"."</span>);
-  }
+            <span class="comment">// Отправляем тестовое сообщение</span>
+            sendData(<span class="string">"Привет с клиента!"</span>); }
 
-  Serial.println(<span class="string">"\n✅ Подключено!"</span>);
-  Serial.print(<span class="string">"📡 IP-адрес клиента: "</span>);
-  Serial.println(WiFi.localIP());
-
-  <span class="comment">// Отправляем тестовое сообщение</span>
-  sendData(<span class="string">"Привет с клиента!"</span>);
-}
-
-<span class="keyword">void</span> <span class="function">loop</span>() {
-  <span class="comment">// Можно добавить периодическую отправку</span>
-  delay(<span class="number">5000</span>);
-  sendData(<span class="string">"Пинг от клиента"</span>);
-}
+            <span class="keyword">void</span>
+            <span class="function">loop</span>() {
+            <span class="comment"
+              >// Можно добавить периодическую отправку</span
+            >
+            delay(<span class="number">5000</span>); sendData(<span
+              class="string"
+              >"Пинг от клиента"</span
+            >); }
           </div>
         </div>
 
@@ -427,22 +492,34 @@ ESP8266WebServer server(<span class="number">80</span>);
 
           <div class="step-card">
             <h4><span class="step-number">1</span> Подготовь две платы</h4>
-            <p>Подключи обе ESP8266 к компьютеру через USB. Убедись, что Arduino IDE видит их (выбери правильные порты).</p>
+            <p>
+              Подключи обе ESP8266 к компьютеру через USB. Убедись, что Arduino
+              IDE видит их (выбери правильные порты).
+            </p>
           </div>
 
           <div class="step-card">
             <h4><span class="step-number">2</span> Загрузи скетч #1</h4>
-            <p>В Arduino IDE выбери плату для ESP8266 #1, загрузи скетч. Открой монитор порта — увидишь IP-адрес <strong>192.168.4.1</strong>.</p>
+            <p>
+              В Arduino IDE выбери плату для ESP8266 #1, загрузи скетч. Открой
+              монитор порта — увидишь IP-адрес <strong>192.168.4.1</strong>.
+            </p>
           </div>
 
           <div class="step-card">
             <h4><span class="step-number">3</span> Загрузи скетч #2</h4>
-            <p>Выбери плату для ESP8266 #2, загрузи скетч. Открой монитор порта — клиент подключится к точке доступа и отправит сообщение.</p>
+            <p>
+              Выбери плату для ESP8266 #2, загрузи скетч. Открой монитор порта —
+              клиент подключится к точке доступа и отправит сообщение.
+            </p>
           </div>
 
           <div class="step-card">
             <h4><span class="step-number">4</span> Проверь связь</h4>
-            <p>В мониторе порта ESP8266 #1 должны появиться полученные сообщения. В мониторе ESP8266 #2 — ответы от сервера.</p>
+            <p>
+              В мониторе порта ESP8266 #1 должны появиться полученные сообщения.
+              В мониторе ESP8266 #2 — ответы от сервера.
+            </p>
           </div>
         </div>
 
@@ -452,20 +529,44 @@ ESP8266WebServer server(<span class="number">80</span>);
         <div class="example-card">
           <h3>🧪 Примеры использования</h3>
           <ul>
-            <li><strong>Беспроводной пульт</strong> — одна ESP8266 с кнопками, вторая управляет роботом</li>
-            <li><strong>Датчик температуры</strong> — клиент отправляет показания, сервер выводит на дисплей</li>
-            <li><strong>Удалённое управление светом</strong> — с одного ESP8266 включаешь свет на другом</li>
-            <li><strong>Система "Умный дом"</strong> — несколько клиентов отправляют данные на один сервер</li>
+            <li>
+              <strong>Беспроводной пульт</strong> — одна ESP8266 с кнопками,
+              вторая управляет роботом
+            </li>
+            <li>
+              <strong>Датчик температуры</strong> — клиент отправляет показания,
+              сервер выводит на дисплей
+            </li>
+            <li>
+              <strong>Удалённое управление светом</strong> — с одного ESP8266
+              включаешь свет на другом
+            </li>
+            <li>
+              <strong>Система "Умный дом"</strong> — несколько клиентов
+              отправляют данные на один сервер
+            </li>
           </ul>
         </div>
 
         <div class="example-card">
           <h3>🤖 Дополнительные идеи</h3>
           <ul>
-            <li><strong>Передавай данные с датчика DHT22</strong> — температура и влажность</li>
-            <li><strong>Добавь шифрование</strong> — кодируй сообщения для безопасности</li>
-            <li><strong>Сделай двустороннюю связь</strong> — обе платы могут отправлять и получать</li>
-            <li><strong>Подключи несколько клиентов</strong> — до 8 устройств одновременно</li>
+            <li>
+              <strong>Передавай данные с датчика DHT22</strong> — температура и
+              влажность
+            </li>
+            <li>
+              <strong>Добавь шифрование</strong> — кодируй сообщения для
+              безопасности
+            </li>
+            <li>
+              <strong>Сделай двустороннюю связь</strong> — обе платы могут
+              отправлять и получать
+            </li>
+            <li>
+              <strong>Подключи несколько клиентов</strong> — до 8 устройств
+              одновременно
+            </li>
           </ul>
         </div>
       </section>
@@ -477,9 +578,14 @@ ESP8266WebServer server(<span class="number">80</span>);
 
       <footer id="footer">
         <div class="footer-content">
-          <p>© <span class="footer-year"></span> WeDo 2.0 Образовательная платформа</p>
-          <p style="font-size: 0.9em; opacity: 0.8;">📡 Урок 8: Связь между двумя ESP8266</p>
-          <p><a href="index.html" style="color: #89b4fa;">На главную</a></p>
+          <p>
+            © <span class="footer-year"></span> WeDo 2.0 Образовательная
+            платформа
+          </p>
+          <p style="font-size: 0.9em; opacity: 0.8">
+            📡 Урок 8: Связь между двумя ESP8266
+          </p>
+          <p><a href="index.html" style="color: #89b4fa">На главную</a></p>
         </div>
       </footer>
     </div>
@@ -493,18 +599,22 @@ ESP8266WebServer server(<span class="number">80</span>);
         <a href="urok-7.html">← Урок 7</a>
       </div>
       <h2>🔐 Эксклюзивный урок 8</h2>
-      <p style="color: #7f8c8d; margin-bottom: 20px;">Введите пароль, полученный от учителя</p>
+      <p style="color: #7f8c8d; margin-bottom: 20px">
+        Введите пароль, полученный от учителя
+      </p>
       <input type="password" id="passwordInput" placeholder="Введите пароль" />
       <button onclick="checkPassword()">Войти</button>
-      <div id="errorMessage" class="error-message">❌ Неверный пароль. Попробуйте снова.</div>
+      <div id="errorMessage" class="error-message">
+        ❌ Неверный пароль. Попробуйте снова.
+      </div>
     </div>
 
     <!-- ============================================================ -->
     <!-- СКРИПТЫ -->
     <!-- ============================================================ -->
     <script>
-      // ===== ПАРОЛЬ =====
-      const CORRECT_PASSWORD = "ESP8266_Link_2025!";
+      // ===== ПАРОЛЬ В BASE64 =====
+      const encodedPassword = "RVNQODI2Nl9MaW5rXzIwMjUh";
 
       function checkPassword() {
         const input = document.getElementById("passwordInput");
@@ -512,7 +622,9 @@ ESP8266WebServer server(<span class="number">80</span>);
         const loginForm = document.getElementById("login-form");
         const content = document.getElementById("protected-content");
 
-        if (input.value === CORRECT_PASSWORD) {
+        const correctPassword = atob(encodedPassword);
+
+        if (input.value === correctPassword) {
           loginForm.style.display = "none";
           content.style.display = "block";
           content.style.animation = "fadeIn 0.5s ease-out";
@@ -534,41 +646,13 @@ ESP8266WebServer server(<span class="number">80</span>);
         }
       };
 
-      document.getElementById("passwordInput").addEventListener("keypress", function (e) {
-        if (e.key === "Enter") {
-          checkPassword();
-        }
-      });
-
-      // ===== КОПИРОВАНИЕ СКЕТЧА #1 =====
-      function copySketch1() {
-        const code = document.getElementById("sketch1").innerText;
-        navigator.clipboard.writeText(code).then(() => {
-          alert("✅ Скетч #1 скопирован!");
-        }).catch(() => {
-          const range = document.createRange();
-          range.selectNode(document.getElementById("sketch1"));
-          window.getSelection().removeAllRanges();
-          window.getSelection().addRange(range);
-          document.execCommand("copy");
-          alert("✅ Скетч #1 скопирован!");
+      document
+        .getElementById("passwordInput")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            checkPassword();
+          }
         });
-      }
-
-      // ===== КОПИРОВАНИЕ СКЕТЧА #2 =====
-      function copySketch2() {
-        const code = document.getElementById("sketch2").innerText;
-        navigator.clipboard.writeText(code).then(() => {
-          alert("✅ Скетч #2 скопирован!");
-        }).catch(() => {
-          const range = document.createRange();
-          range.selectNode(document.getElementById("sketch2"));
-          window.getSelection().removeAllRanges();
-          window.getSelection().addRange(range);
-          document.execCommand("copy");
-          alert("✅ Скетч #2 скопирован!");
-        });
-      }
     </script>
   </body>
 </html>

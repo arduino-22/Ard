@@ -597,8 +597,8 @@
     <!-- СКРИПТЫ -->
     <!-- ============================================================ -->
     <script>
-      // ===== ПАРОЛЬ =====
-      const CORRECT_PASSWORD = "Converter_2025!";
+      // ===== ПАРОЛЬ В BASE64 =====
+      const encodedPassword = "Q29udmVydGVyXzIwMjUh";
 
       function checkPassword() {
         const input = document.getElementById("passwordInput");
@@ -606,7 +606,9 @@
         const loginForm = document.getElementById("login-form");
         const content = document.getElementById("protected-content");
 
-        if (input.value === CORRECT_PASSWORD) {
+        const correctPassword = atob(encodedPassword);
+
+        if (input.value === correctPassword) {
           loginForm.style.display = "none";
           content.style.display = "block";
           content.style.animation = "fadeIn 0.5s ease-out";
@@ -635,25 +637,6 @@
             checkPassword();
           }
         });
-
-      // ===== КОПИРОВАНИЕ СКЕТЧА =====
-      function copySketch() {
-        const code = document.getElementById("sketchCode").innerText;
-        navigator.clipboard
-          .writeText(code)
-          .then(() => {
-            alert("✅ Скетч скопирован в буфер обмена!");
-          })
-          .catch(() => {
-            // Резервный способ
-            const range = document.createRange();
-            range.selectNode(document.getElementById("sketchCode"));
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
-            document.execCommand("copy");
-            alert("✅ Скетч скопирован!");
-          });
-      }
     </script>
   </body>
 </html>

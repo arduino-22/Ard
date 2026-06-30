@@ -4,17 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WeDo 2.0: Урок 3 — Датчики</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header>
-      <h1>📡 Урок 3: Датчики в WeDo 2.0</h1>
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        <h1>📡 Урок 3: Датчики в WeDo 2.0</h1>
+        <button
+          id="themeToggle"
+          class="btn-theme-toggle"
+          aria-label="Переключить тему"
+        >
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
       <p><a href="index.html" style="color: #3498db">← На главную</a></p>
     </header>
 
     <section class="lesson-content">
       <h2>Тема: Датчики движения и наклона</h2>
-
       <div class="example-card">
         <h3>🎯 Цель урока</h3>
         <p>
@@ -22,7 +41,6 @@
           управления роботом.
         </p>
       </div>
-
       <div class="example-card">
         <h3>📡 Датчик движения</h3>
         <p>
@@ -47,11 +65,11 @@
             margin: 10px 0;
           "
         >
-          <strong>💡 Пример кода:</strong><br />
-          <code>Если расстояние &lt; 5 см → Остановить мотор</code>
+          <strong>💡 Пример кода:</strong><br /><code
+            >Если расстояние &lt; 5 см → Остановить мотор</code
+          >
         </div>
       </div>
-
       <div class="example-card">
         <h3>📐 Датчик наклона</h3>
         <p>
@@ -76,21 +94,19 @@
             margin: 10px 0;
           "
         >
-          <strong>💡 Пример кода:</strong><br />
-          <code>Если наклон влево → Включить мотор назад</code>
+          <strong>💡 Пример кода:</strong><br /><code
+            >Если наклон влево → Включить мотор назад</code
+          >
         </div>
       </div>
-
       <div class="example-card">
         <h3>🔬 Эксперимент: "Робот-охранник"</h3>
-        <p>Собери модель робота, который реагирует на движение:</p>
         <ol>
           <li>Подключи датчик движения к порту SmartHub</li>
           <li>Запрограммируй: если датчик видит объект → включить сигнал</li>
           <li>Проверь работу: поднеси руку к датчику</li>
         </ol>
       </div>
-
       <div class="lesson-navigation">
         <a href="urok-2.html">← Урок 2: Моторы</a>
         <a href="urok-4.html">Урок 4: Программирование →</a>
@@ -99,10 +115,16 @@
 
     <footer>
       <div class="footer-content">
-        <p>© 2023 WeDo 2.0 Образовательная платформа</p>
+        <p>
+          © <span class="footer-year"></span> WeDo 2.0 Образовательная платформа
+        </p>
         <p style="font-size: 0.9em; opacity: 0.8">📚 Урок 3: Датчики</p>
         <p><a href="index.html" style="color: #89b4fa">На главную</a></p>
       </div>
     </footer>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
   </body>
 </html>

@@ -1,6 +1,8 @@
-/* styles.css - Полный файл стилей */
+/* ============================================================
+   styles.css — полный файл стилей для WeDo 2.0
+   ============================================================ */
 
-/* Базовые стили */
+/* ===== БАЗОВЫЕ СТИЛИ ===== */
 :root {
   --primary-color: #2c3e50;
   --secondary-color: #3498db;
@@ -15,7 +17,7 @@ body {
   background-color: #f9f9f9;
 }
 
-/* Адаптивные изображения */
+/* ===== АДАПТИВНЫЕ ИЗОБРАЖЕНИЯ ===== */
 img {
   max-width: 100%;
   height: auto;
@@ -30,7 +32,7 @@ img:hover {
   transform: scale(1.02);
 }
 
-/* Карточки с анимацией */
+/* ===== КАРТОЧКИ С АНИМАЦИЕЙ ===== */
 .example-card {
   border: 1px solid #ddd;
   padding: 15px;
@@ -46,7 +48,27 @@ img:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Адаптивные медиа-запросы */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== СПИСКИ ===== */
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin: 8px 0;
+}
+
+/* ===== АДАПТИВНЫЕ МЕДИА-ЗАПРОСЫ ===== */
 @media (max-width: 768px) {
   body {
     padding: 10px;
@@ -67,28 +89,230 @@ img:hover {
   }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
+/* ============================================================
+   СЛАЙДЕР (карусель) — картинка слева, текст справа
+   ============================================================ */
+.slide-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+  padding: 20px 0;
+}
+
+.slide-content .slide-image {
+  flex: 1;
+  max-width: 50%;
+}
+
+.slide-content .slide-image img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.slide-content .slide-image img:hover {
+  transform: scale(1.02);
+}
+
+.slide-content .slide-text {
+  flex: 1;
+  padding: 10px;
+}
+
+.slide-content .slide-text h3 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.slide-content .slide-text p {
+  color: #555;
+  line-height: 1.7;
+}
+
+/* Карусель — плавный переход */
+.carousel-item {
+  transition: transform 0.6s ease-in-out;
+}
+
+/* Индикаторы (точки) */
+.carousel-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #3498db;
+  background: transparent !important;
+  margin: 0 6px;
+}
+
+.carousel-indicators button.active {
+  background: #3498db !important;
+}
+
+/* Стрелки навигации */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #3498db;
+  border-radius: 50%;
+  padding: 20px;
+  background-size: 50%;
+}
+
+/* ============================================================
+   МЕНЮ (кнопка "Уроки" с выпадашкой)
+   ============================================================ */
+.navbar-custom {
+  background: white;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  padding: 12px 0;
+  margin-bottom: 30px;
+  border-radius: 12px;
+}
+
+.navbar-custom .navbar-brand {
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: #2c3e50;
+}
+
+.navbar-custom .navbar-brand span {
+  color: #3498db;
+}
+
+.navbar-custom .dropdown-menu {
+  border: none;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  padding: 10px 0;
+}
+
+.navbar-custom .dropdown-item {
+  padding: 10px 24px;
+  font-weight: 500;
+  color: #2c3e50;
+  transition: all 0.2s ease;
+}
+
+.navbar-custom .dropdown-item:hover {
+  background: #f0f7ff;
+  color: #3498db;
+  padding-left: 30px;
+}
+
+.navbar-custom .dropdown-item i {
+  width: 24px;
+  color: #3498db;
+  margin-right: 8px;
+}
+
+.navbar-custom .dropdown-item .badge-exclusive {
+  background: #e74c3c;
+  color: white;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-left: 8px;
+}
+
+.navbar-custom .btn-lessons {
+  background: #3498db;
+  color: white;
+  padding: 10px 28px;
+  border-radius: 30px;
+  font-weight: 600;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.navbar-custom .btn-lessons:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+/* ============================================================
+   КНОПКА ПЕРЕКЛЮЧЕНИЯ ТЕМЫ
+   ============================================================ */
+.btn-theme-toggle {
+  background: transparent;
+  border: 2px solid #3498db;
+  color: #3498db;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.btn-theme-toggle:hover {
+  background: #3498db;
+  color: white;
+  transform: rotate(20deg);
+}
+
+/* ============================================================
+   КНОПКА ПРОКРУТКИ ВНИЗ
+   ============================================================ */
+.scroll-down {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: #3498db;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  cursor: pointer;
+  animation: bounce 2s infinite;
+}
+
+.scroll-down:hover {
+  background: #2980b9;
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(52, 152, 219, 0.6);
+}
+
+.scroll-down .arrow-down {
+  display: block;
+  line-height: 1;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateY(0);
   }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
 }
 
-/* Стили для списков */
-ul {
-  padding-left: 20px;
-}
-
-li {
-  margin: 8px 0;
-}
-
-/* ========== МОДЕРНИЗИРОВАННЫЙ ФУТЕР ========== */
-/* ========== СТИЛИ ФУТЕРА (уже есть) ========== */
+/* ============================================================
+   ФУТЕР
+   ============================================================ */
 footer {
   margin-top: 50px;
   padding: 30px 20px;
@@ -126,10 +350,13 @@ footer::before {
   }
 }
 
-footer p {
-  margin: 8px 0;
+footer * {
   position: relative;
   z-index: 1;
+}
+
+footer p {
+  margin: 8px 0;
 }
 
 footer p:first-child {
@@ -143,15 +370,13 @@ footer p:last-child {
   font-size: 0.95em;
 }
 
-/* Современная форма в футере */
+/* Форма в футере */
 footer form {
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   justify-content: center;
-  position: relative;
-  z-index: 1;
 }
 
 footer input,
@@ -208,35 +433,12 @@ footer button:active {
   transform: translateY(0);
 }
 
-/* Адаптив для футера */
-@media (max-width: 768px) {
-  footer {
-    padding: 20px 15px;
-    border-radius: 8px;
-  }
-
-  footer form {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  footer input,
-  footer textarea {
-    max-width: 100%;
-  }
-
-  footer button {
-    width: 100%;
-    max-width: 200px;
-  }
-}
-
-/* ========== НАВИГАЦИЯ ПО УРОКАМ (ДОБАВЛЯЕМ НОВОЕ) ========== */
+/* ============================================================
+   НАВИГАЦИЯ ПО УРОКАМ В ФУТЕРЕ
+   ============================================================ */
 .lesson-nav {
   margin: 15px 0;
   text-align: center;
-  position: relative;
-  z-index: 1;
 }
 
 .lesson-nav h4 {
@@ -288,153 +490,11 @@ footer button:active {
   height: 2px;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 2px;
-  position: relative;
-  z-index: 1;
 }
 
-/* Адаптив для мобильных */
-@media (max-width: 600px) {
-  .lesson-nav ul {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .lesson-nav ul li {
-    width: 80%;
-  }
-}
-
-/* Декоративный элемент */
-footer::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.05) 0%,
-    transparent 70%
-  );
-  animation: rotate 20s linear infinite;
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-footer p {
-  margin: 8px 0;
-  position: relative;
-  z-index: 1;
-}
-
-footer p:first-child {
-  font-size: 1.1em;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-}
-
-footer p:last-child {
-  opacity: 0.9;
-  font-size: 0.95em;
-}
-
-/* Современная форма в футере */
-footer form {
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-  position: relative;
-  z-index: 1;
-}
-
-footer input,
-footer textarea {
-  padding: 12px 16px;
-  border: none;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  color: white;
-  font-size: 14px;
-  transition: all 0.3s ease;
-  width: 100%;
-  max-width: 300px;
-}
-
-footer input::placeholder,
-footer textarea::placeholder {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-footer input:focus,
-footer textarea:focus {
-  outline: 2px solid rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.25);
-}
-
-footer textarea {
-  max-width: 400px;
-  min-height: 80px;
-  resize: vertical;
-}
-
-footer button {
-  padding: 12px 30px;
-  border: none;
-  border-radius: 8px;
-  background: white;
-  color: #2c3e50;
-  font-weight: bold;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-footer button:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  background: #ecf0f1;
-}
-
-footer button:active {
-  transform: translateY(0);
-}
-
-/* Адаптив для футера */
-@media (max-width: 768px) {
-  footer {
-    padding: 20px 15px;
-    border-radius: 8px;
-  }
-
-  footer form {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  footer input,
-  footer textarea {
-    max-width: 100%;
-  }
-
-  footer button {
-    width: 100%;
-    max-width: 200px;
-  }
-}
-/* ========== СТИЛИ ДЛЯ СТРАНИЦ УРОКОВ ========== */
-
+/* ============================================================
+   СТИЛИ ДЛЯ СТРАНИЦ УРОКОВ
+   ============================================================ */
 .lesson-content {
   max-width: 800px;
   margin: 0 auto;
@@ -517,4 +577,175 @@ header a:hover {
 
 .lesson-navigation a:first-child:hover {
   background: #616a6b;
+}
+
+/* ============================================================
+   АВТОМАТИЧЕСКОЕ ОБНОВЛЕНИЕ ГОДА В КОПИРАЙТЕ
+   ============================================================ */
+.footer-year::after {
+  content: "2026";
+}
+
+/* ============================================================
+   ТЁМНАЯ ТЕМА
+   ============================================================ */
+body.dark-theme {
+  background-color: #1e1e2e;
+  color: #cdd6f4;
+}
+
+body.dark-theme .navbar-custom {
+  background: #2a2a3e;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-theme .navbar-custom .navbar-brand {
+  color: #cdd6f4;
+}
+
+body.dark-theme .navbar-custom .navbar-brand span {
+  color: #89b4fa;
+}
+
+body.dark-theme .navbar-custom .btn-lessons {
+  background: #45475a;
+  color: #cdd6f4;
+}
+
+body.dark-theme .navbar-custom .btn-lessons:hover {
+  background: #585b70;
+}
+
+body.dark-theme .navbar-custom .dropdown-menu {
+  background: #2a2a3e;
+  border: 1px solid #45475a;
+}
+
+body.dark-theme .navbar-custom .dropdown-item {
+  color: #cdd6f4;
+}
+
+body.dark-theme .navbar-custom .dropdown-item:hover {
+  background: #45475a;
+  color: #89b4fa;
+}
+
+body.dark-theme .example-card {
+  background: #2a2a3e;
+  border-color: #45475a;
+  color: #cdd6f4;
+}
+
+body.dark-theme .example-card h3,
+body.dark-theme .example-card strong {
+  color: #a6e3a1;
+}
+
+body.dark-theme .slide-text h3 {
+  color: #89b4fa;
+}
+
+body.dark-theme .slide-text p,
+body.dark-theme .slide-text li {
+  color: #cdd6f4;
+}
+
+body.dark-theme #resources {
+  background: #2a2a3e !important;
+}
+
+body.dark-theme .list-group-item {
+  background: #2a2a3e;
+  color: #cdd6f4;
+  border-color: #45475a;
+}
+
+body.dark-theme .list-group-item i {
+  color: #89b4fa !important;
+}
+
+body.dark-theme .btn-theme-toggle {
+  border-color: #f9e2af;
+  color: #f9e2af;
+}
+
+body.dark-theme .btn-theme-toggle:hover {
+  background: #f9e2af;
+  color: #1e1e2e;
+}
+
+body.dark-theme footer {
+  background: linear-gradient(135deg, #1a1a2e 0%, #2a2a4e 100%);
+}
+
+body.dark-theme .scroll-down {
+  background: #89b4fa;
+  box-shadow: 0 4px 15px rgba(137, 180, 250, 0.4);
+}
+
+body.dark-theme .scroll-down:hover {
+  background: #6c9bd4;
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 600px) {
+  .scroll-down {
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .lesson-nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .lesson-nav ul li {
+    width: 80%;
+  }
+}
+
+@media (max-width: 768px) {
+  .slide-content {
+    flex-direction: column;
+  }
+
+  .slide-content .slide-image {
+    max-width: 100%;
+  }
+
+  .slide-content .slide-image img {
+    height: 200px;
+  }
+
+  .navbar-custom .navbar-brand {
+    font-size: 1.1rem;
+  }
+
+  .navbar-custom .btn-lessons {
+    padding: 6px 16px;
+    font-size: 14px;
+  }
+
+  footer {
+    padding: 20px 15px;
+    border-radius: 8px;
+  }
+
+  footer form {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  footer input,
+  footer textarea {
+    max-width: 100%;
+  }
+
+  footer button {
+    width: 100%;
+    max-width: 200px;
+  }
 }

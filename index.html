@@ -4,160 +4,350 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WeDo 2.0: Примеры для начинающих</title>
-
-    <!-- Подключаем внешний CSS файл -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="styles.css" />
-    <!-- Кнопка "Вниз" -->
+  </head>
+  <body>
+    <div class="container">
+      <!-- ===== МЕНЮ ===== -->
+      <nav class="navbar-custom">
+        <div
+          class="container-fluid d-flex justify-content-between align-items-center"
+        >
+          <a class="navbar-brand" href="#"> 🤖 WeDo <span>2.0</span> </a>
+          <div class="d-flex align-items-center gap-2">
+            <div class="dropdown">
+              <button
+                class="btn-lessons dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+              >
+                📚 Уроки
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <a class="dropdown-item" href="urok-1.html"
+                    ><i class="fas fa-rocket"></i> Урок 1: Знакомство</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="urok-2.html"
+                    ><i class="fas fa-microchip"></i> Урок 2: Моторы</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="urok-3.html"
+                    ><i class="fas fa-satellite-dish"></i> Урок 3: Датчики</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="urok-4.html"
+                    ><i class="fas fa-code"></i> Урок 4: Программирование</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="urok-5.html"
+                    ><i class="fas fa-flag-checkered"></i> Урок 5: Проект</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="urok-6.html"
+                    ><i class="fas fa-lock"></i> Урок 6: ESP8266
+                    <span class="badge-exclusive">Эксклюзив</span></a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="urok-7.html"
+                    ><i class="fas fa-calculator"></i> Урок 7: Конвертер
+                    <span class="badge-exclusive">Эксклюзив</span></a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="urok-8.html"
+                    ><i class="fas fa-wifi"></i> Урок 8: Связь ESP
+                    <span class="badge-exclusive">Эксклюзив</span></a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="teacher-panel.html"
+                    ><i class="fas fa-chalkboard-teacher"></i> 👨‍🏫 Панель
+                    учителя</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <button
+              id="themeToggle"
+              class="btn-theme-toggle"
+              aria-label="Переключить тему"
+            >
+              <i class="fas fa-moon"></i>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <!-- ===== ЗАГОЛОВОК ===== -->
+      <header class="text-center my-4">
+        <h1 class="display-5 fw-bold">
+          WeDo 2.0: Стартовые проекты для новичков
+        </h1>
+        <p class="lead text-muted">
+          Базовые примеры для освоения робототехники с LEGO Education WeDo 2.0
+        </p>
+      </header>
+
+      <!-- ===== КАРУСЕЛЬ ===== -->
+      <div
+        id="mainCarousel"
+        class="carousel slide carousel-fade"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#mainCarousel"
+            data-bs-slide-to="0"
+            class="active"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#mainCarousel"
+            data-bs-slide-to="1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#mainCarousel"
+            data-bs-slide-to="2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#mainCarousel"
+            data-bs-slide-to="3"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#mainCarousel"
+            data-bs-slide-to="4"
+          ></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="slide-content">
+              <div class="slide-image">
+                <img
+                  src="img/RebenokSoberaetWeDo2.jpg"
+                  alt="Ребёнок собирает Lego"
+                />
+              </div>
+              <div class="slide-text">
+                <h3>🧒 Lego WeDo 2.0</h3>
+                <p>
+                  <strong>Ребёнок собирает конструкцию из Lego WeDo 2.0</strong
+                  ><br />На наших занятиях ребёнок с удовольствием собирает из
+                  конструктора Lego WeDo 2.0, ИИ индивидуально подберёт к нему
+                  программу обучения, отвечая на его запросы и интересы 😊
+                </p>
+                <span class="badge bg-primary">Популярное</span>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="slide-content">
+              <div class="slide-image">
+                <img src="img/DetiPomog-t.jpg" alt="Дети помогают друг другу" />
+              </div>
+              <div class="slide-text">
+                <h3>🤝 Дети в коллективе</h3>
+                <p>
+                  <strong>Дети сообща помогают друг другу.</strong><br />Тем
+                  самым они развивают в себе коммуникативность, учатся работать
+                  в команде и поддерживать друг друга.
+                </p>
+                <span class="badge bg-success">Команда</span>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="slide-content">
+              <div class="slide-image">
+                <img
+                  src="img/gono4-prepyatstvie.jpg"
+                  alt="Гоночный автомобиль"
+                />
+              </div>
+              <div class="slide-text">
+                <h3>🏎️ Гоночный автомобиль</h3>
+                <p>
+                  <strong>Модель с мотором и датчиком движения</strong
+                  ><br />Реагирует на препятствия. Идеальный проект для изучения
+                  основ робототехники и программирования.
+                </p>
+                <span class="badge bg-warning text-dark">Скорость</span>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="slide-content">
+              <div class="slide-image">
+                <img src="img/ventilyator.jpg" alt="Вентилятор" />
+              </div>
+              <div class="slide-text">
+                <h3>🌀 Вентилятор</h3>
+                <p>
+                  <strong
+                    >Использование редукции для изменения скорости
+                    вращения.</strong
+                  ><br />Практический проект для изучения механических передач и
+                  управления скоростью.
+                </p>
+                <span class="badge bg-info text-dark">Механика</span>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="slide-content">
+              <div class="slide-image">
+                <img src="img/gono4-prepyatstvie.jpg" alt="Программирование" />
+              </div>
+              <div class="slide-text">
+                <h3>💻 Программирование</h3>
+                <p><strong>Базовые блоки программирования:</strong></p>
+                <ul>
+                  <li>Запуск/остановка мотора</li>
+                  <li>Циклы повторения</li>
+                  <li>Реакция на датчик наклона</li>
+                </ul>
+                <span class="badge bg-dark">Код</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#mainCarousel"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#mainCarousel"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+
+      <!-- ===== РЕСУРСЫ ===== -->
+      <section id="resources" class="mt-5 p-4 bg-light rounded-4">
+        <h2 class="text-center mb-3">📚 Где найти материалы</h2>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <i class="fas fa-globe text-primary me-2"></i>Официальный сайт LEGO
+            Education → раздел "WeDo 2.0 Curriculum"
+          </li>
+          <li class="list-group-item">
+            <i class="fab fa-youtube text-danger me-2"></i>YouTube: каналы с
+            тегами #WeDo2 и #LegoEducation
+          </li>
+          <li class="list-group-item">
+            <i class="fab fa-scratch text-warning me-2"></i>Сообщество Scratch:
+            проекты с интеграцией WeDo
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- ===== ФУТЕР ===== -->
+    <footer id="footer">
+      <div class="container">
+        <div class="footer-content">
+          <nav class="lesson-nav">
+            <h4>📚 Уроки</h4>
+            <ul>
+              <li><a href="urok-1.html">Урок 1: Знакомство</a></li>
+              <li><a href="urok-2.html">Урок 2: Моторы</a></li>
+              <li><a href="urok-3.html">Урок 3: Датчики</a></li>
+              <li><a href="urok-4.html">Урок 4: Программирование</a></li>
+              <li><a href="urok-5.html">Урок 5: Проект</a></li>
+              <li><a href="urok-6.html">Урок 6: Продвинутый 🔐</a></li>
+              <li><a href="urok-7.html">Урок 7: Конвертер 📐</a></li>
+              <li><a href="urok-8.html">Урок 8: Связь ESP 📡</a></li>
+              <li><a href="teacher-panel.html">👨‍🏫 Панель учителя</a></li>
+            </ul>
+          </nav>
+          <hr class="footer-divider" />
+          <p>© 2026 WeDo 2.0 Образовательная платформа</p>
+          <p>Для некоммерческого использования</p>
+          <p style="font-size: 0.9em; opacity: 0.8">
+            📧 Контакты: support@wedo-learning.ru
+          </p>
+          <form
+            action="https://formspree.io/f/ваш-id"
+            method="POST"
+            style="max-width: 400px; margin: 20px auto"
+          >
+            <input
+              type="email"
+              name="email"
+              placeholder="Ваш email"
+              required
+              style="
+                width: 100%;
+                padding: 12px;
+                border-radius: 8px;
+                border: none;
+                margin-bottom: 10px;
+              "
+            />
+            <textarea
+              name="message"
+              placeholder="Сообщение"
+              required
+              style="
+                width: 100%;
+                padding: 12px;
+                border-radius: 8px;
+                border: none;
+                margin-bottom: 10px;
+              "
+            ></textarea>
+            <button
+              type="submit"
+              style="
+                padding: 12px 30px;
+                background: white;
+                color: #2c3e50;
+                font-weight: bold;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+              "
+            >
+              ✉️ Отправить
+            </button>
+          </form>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== КНОПКА ВНИЗ ===== -->
     <a href="#footer" class="scroll-down" aria-label="Перейти к подвалу">
       <span class="arrow-down">↓</span>
     </a>
-  </head>
-  <body>
-    <header>
-      <h1>WeDo 2.0: Стартовые проекты для новичков</h1>
-      <p>
-        Базовые примеры для освоения робототехники с LEGO Education WeDo 2.0
-      </p>
-    </header>
 
-    <h2>Lego WeDo 2.0</h2>
-    <div class="example-card">
-      <div
-        class="alt-description"
-        role="img"
-        aria-label="Пример: Ребёнок собирает конструкцию из Lego"
-      >
-        <strong>Ребёнок собирает конструкцию из Lego WeDo 2.0</strong><br />
-        <img
-          src="img/RebenokSoberaetWeDo2.jpg"
-          alt="gono4-prepyatstvie"
-          width="700"
-        /><br />
-        Особенности: На наших занятиях ребёнок с удовольствием собирает из
-        конструктора Lego WeDo 2.0, ИИ индивидуально подберёт к нему программу
-        обучения отвечая на его запросы и интересы ;-)
-      </div>
-    </div>
-
-    <h2>Дети в коллективе</h2>
-    <div class="example-card">
-      <div
-        class="alt-description"
-        role="img"
-        aria-label="Пример: сообща помогают друг другу"
-      >
-        <strong>Дети сообща помогают друг другу.</strong><br />
-        <img
-          src="img/DetiPomog-t.jpg"
-          alt="gono4-prepyatstvie"
-          width="700"
-        /><br />
-        Особенности: Тем самым они развивают в себе коммуникативность.
-      </div>
-    </div>
-
-    <section id="basic-projects">
-      <h2>Простые модели</h2>
-
-      <div class="example-card">
-        <div
-          class="alt-description"
-          role="img"
-          aria-label="Пример: Гоночный автомобиль"
-        >
-          <strong>Пример 1: Гоночный автомобиль </strong><br />
-          <img
-            src="img/gono4-prepyatstvie.jpg"
-            alt="gono4-prepyatstvie"
-            width="700"
-          /><br />
-          Особенности: Модель с мотором и датчиком движения, реагирует на
-          препятствия.
-        </div>
-      </div>
-
-      <div class="example-card">
-        <div
-          class="alt-description"
-          role="img"
-          aria-label="Пример: Вращающийся вентилятор"
-        >
-          <strong>Пример 2: Вентилятор</strong><br />
-          <img
-            width="700"
-            src="img/ventilyator.jpg"
-            alt="ventilyator"
-            srcset="./img/ventilyator.jpg 800w, ./img/bot.png 500w"
-          /><br />
-          Особенности: Использование редукции для изменения скорости вращения.
-        </div>
-      </div>
-    </section>
-
-    <section id="programming">
-      <h2>Программирование</h2>
-
-      <div class="example-card">
-        <div
-          class="alt-description"
-          role="img"
-          aria-label="Блок-схема: Управление мотором"
-        >
-          <strong>Базовые блоки:</strong>
-          <ul>
-            <li>Запуск/остановка мотора</li>
-            <li>Циклы повторения</li>
-            <li>Реакция на датчик наклона</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="resources">
-      <h2>Где найти материалы</h2>
-      <ul>
-        <li>Официальный сайт LEGO Education → раздел "WeDo 2.0 Curriculum"</li>
-        <li>YouTube: каналы с тегами #WeDo2 и #LegoEducation</li>
-        <li>Сообщество Scratch: проекты с интеграцией WeDo</li>
-      </ul>
-    </section>
-
-    <!-- МОДЕРНИЗИРОВАННЫЙ ФУТЕР -->
-    <footer>
-      <footer id="footer"></footer>
-      <div class="footer-content">
-        <!-- Навигация по урокам -->
-        <nav class="lesson-nav">
-          <h4>📚 Уроки</h4>
-          <ul>
-            <li><a href="urok-1.html">Урок 1: Знакомство</a></li>
-            <li><a href="urok-2.html">Урок 2: Моторы</a></li>
-            <li><a href="urok-3.html">Урок 3: Датчики</a></li>
-            <li><a href="urok-4.html">Урок 4: Программирование</a></li>
-            <li><a href="urok-5.html">Урок 5: Проект</a></li>
-            <li>
-              <a href="urok-6.html">Урок 6: Продвинутый (эксклюзив) 🔐</a>
-            </li>
-            <li><a href="urok-7.html">Урок 7: Конвертер единиц 📐</a></li>
-            <li><a href="urok-8.html">Урок 8: Связь ESP8266 📡</a></li>
-            <li><a href="teacher-panel.html">👨‍🏫 Панель учителя</a></li>
-          </ul>
-        </nav>
-
-        <hr class="footer-divider" />
-
-        <p>© 2026 WeDo 2.0 Образовательная платформа</p>
-        <p>Для некоммерческого использования</p>
-        <p style="font-size: 0.9em; opacity: 0.8">
-          📧 Контакты: support@wedo-learning.ru
-        </p>
-
-        <form action="https://formspree.io/f/ваш-id" method="POST">
-          <input type="email" name="email" placeholder="Ваш email" required />
-          <textarea name="message" placeholder="Сообщение" required></textarea>
-          <button type="submit">✉️ Отправить</button>
-        </form>
-      </div>
-    </footer>
+    <!-- ===== СКРИПТЫ (ВСЕГДА В КОНЦЕ) ===== -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
   </body>
 </html>

@@ -4,22 +4,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WeDo 2.0: Урок 2 — Моторы</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header>
-      <h1>⚡ Урок 2: Моторы в WeDo 2.0</h1>
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        <h1>⚡ Урок 2: Моторы в WeDo 2.0</h1>
+        <button
+          id="themeToggle"
+          class="btn-theme-toggle"
+          aria-label="Переключить тему"
+        >
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
       <p><a href="index.html" style="color: #3498db">← На главную</a></p>
     </header>
 
     <section class="lesson-content">
       <h2>Тема: Управление моторами</h2>
-
       <div class="example-card">
         <h3>🎯 Цель урока</h3>
         <p>Научиться подключать и программировать мотор LEGO WeDo 2.0.</p>
       </div>
-
       <div class="example-card">
         <h3>🔧 Что такое мотор?</h3>
         <p>
@@ -33,7 +51,6 @@
           <li><strong>Направление:</strong> вперёд / назад</li>
         </ul>
       </div>
-
       <div class="example-card">
         <h3>📖 Программирование мотора</h3>
         <p>В среде программирования WeDo 2.0 используются следующие блоки:</p>
@@ -44,7 +61,6 @@
           <li><strong>Вращаться по часовой стрелке</strong> — направление</li>
         </ul>
       </div>
-
       <div class="example-card">
         <h3>🔬 Эксперимент</h3>
         <p>
@@ -53,8 +69,6 @@
         </p>
         <img src="img/ventilyator.jpg" alt="Вентилятор WeDo 2.0" width="500" />
       </div>
-
-      <!-- НАВИГАЦИЯ МЕЖДУ УРОКАМИ -->
       <div class="lesson-navigation">
         <a href="urok-1.html">← Урок 1: Знакомство</a>
         <a href="urok-3.html">Урок 3: Датчики →</a>
@@ -63,10 +77,16 @@
 
     <footer>
       <div class="footer-content">
-        <p>© 2023 WeDo 2.0 Образовательная платформа</p>
+        <p>
+          © <span class="footer-year"></span> WeDo 2.0 Образовательная платформа
+        </p>
         <p style="font-size: 0.9em; opacity: 0.8">📚 Урок 2: Моторы</p>
         <p><a href="index.html" style="color: #89b4fa">На главную</a></p>
       </div>
     </footer>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
   </body>
 </html>

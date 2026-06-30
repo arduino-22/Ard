@@ -5,155 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Урок 6: ESP8266 — Веб-сервер</title>
     <meta name="robots" content="noindex, nofollow" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="styles.css" />
-    <style>
-      /* Стили для страницы входа */
-      .login-container {
-        max-width: 400px;
-        margin: 50px auto;
-        padding: 30px;
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        text-align: center;
-      }
-
-      .login-container h2 {
-        margin-bottom: 20px;
-        color: #2c3e50;
-      }
-
-      .login-container input {
-        width: 100%;
-        padding: 12px;
-        margin: 10px 0;
-        border: 2px solid #ddd;
-        border-radius: 8px;
-        font-size: 16px;
-        box-sizing: border-box;
-      }
-
-      .login-container input:focus {
-        border-color: #3498db;
-        outline: none;
-      }
-
-      .login-container button {
-        width: 100%;
-        padding: 12px;
-        background: #3498db;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-      }
-
-      .login-container button:hover {
-        background: #2980b9;
-      }
-
-      .error-message {
-        color: #e74c3c;
-        margin: 10px 0;
-        display: none;
-      }
-
-      .encrypted-content {
-        display: none;
-      }
-
-      /* Стили для кода */
-      .code-block {
-        background: #2c3e50;
-        color: #ecf0f1;
-        padding: 20px;
-        border-radius: 8px;
-        overflow-x: auto;
-        font-family: "Courier New", monospace;
-        font-size: 14px;
-        line-height: 1.6;
-        margin: 15px 0;
-        white-space: pre-wrap;
-        word-break: break-all;
-      }
-
-      .code-block .comment {
-        color: #7f8c8d;
-      }
-      .code-block .keyword {
-        color: #e74c3c;
-      }
-      .code-block .string {
-        color: #f1c40f;
-      }
-      .code-block .function {
-        color: #3498db;
-      }
-
-      .step-card {
-        border-left: 4px solid #3498db;
-        padding: 15px 20px;
-        background: #f8f9fa;
-        border-radius: 4px;
-        margin: 15px 0;
-      }
-
-      .step-card h4 {
-        margin-top: 0;
-        color: #2c3e50;
-      }
-
-      .step-card .step-number {
-        display: inline-block;
-        background: #3498db;
-        color: white;
-        border-radius: 50%;
-        width: 28px;
-        height: 28px;
-        text-align: center;
-        line-height: 28px;
-        font-weight: bold;
-        margin-right: 10px;
-      }
-
-      .warning {
-        background: #fff3cd;
-        border-left: 4px solid #ffc107;
-        padding: 15px;
-        border-radius: 4px;
-        margin: 15px 0;
-      }
-
-      .warning strong {
-        color: #856404;
-      }
-
-      .success-box {
-        background: #d4edda;
-        border-left: 4px solid #28a745;
-        padding: 15px;
-        border-radius: 4px;
-        margin: 15px 0;
-      }
-
-      .success-box strong {
-        color: #155724;
-      }
-    </style>
   </head>
   <body>
-    <!-- ЗАЩИЩЁННЫЙ КОНТЕНТ (виден только после ввода пароля) -->
+    <!-- ===== ЗАЩИЩЁННЫЙ КОНТЕНТ ===== -->
     <div id="protected-content" class="encrypted-content">
       <header>
-        <h1>🚀 Урок 6: Веб-сервер на ESP8266</h1>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <h1>🚀 Урок 6: Веб-сервер на ESP8266</h1>
+          <button
+            id="themeToggle"
+            class="btn-theme-toggle"
+            aria-label="Переключить тему"
+          >
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
         <p><a href="index.html" style="color: #3498db">← На главную</a></p>
       </header>
 
       <section class="lesson-content">
         <h2>Тема: Программирование ESP8266 и создание веб-сервера</h2>
-
         <div class="example-card">
           <h3>🎯 Цель урока</h3>
           <p>
@@ -161,7 +44,6 @@
             собственный веб-сервер для управления устройствами через интернет.
           </p>
         </div>
-
         <div class="example-card">
           <h3>🧠 Что такое ESP8266?</h3>
           <p>
@@ -180,10 +62,8 @@
             5V! Не подключайте напрямую к 5V — это сожжёт микроконтроллер.
           </div>
         </div>
-
         <div class="example-card">
           <h3>🔧 Установка Arduino IDE для ESP8266</h3>
-
           <div class="step-card">
             <h4><span class="step-number">1</span> Установите Arduino IDE</h4>
             <p>
@@ -193,7 +73,6 @@
               >
             </p>
           </div>
-
           <div class="step-card">
             <h4>
               <span class="step-number">2</span> Добавьте платформу ESP8266
@@ -207,7 +86,6 @@
               https://arduino.esp8266.com/stable/package_esp8266com_index.json
             </div>
           </div>
-
           <div class="step-card">
             <h4><span class="step-number">3</span> Установите пакет ESP8266</h4>
             <p>
@@ -215,25 +93,20 @@
               найдите <strong>esp8266</strong> и установите.
             </p>
           </div>
-
           <div class="step-card">
             <h4><span class="step-number">4</span> Подключите ESP8266</h4>
             <p>
               Подключите ESP8266 к компьютеру через USB-кабель. Выберите плату:
               <strong>Инструменты → Плата → ESP8266 → NodeMCU 1.0</strong> (или
-              вашу модель).
-            </p>
-            <p>
-              Выберите порт: <strong>Инструменты → Порт</strong> (например, COM3
-              на Windows или /dev/ttyUSB0 на Linux).
+              вашу модель). Выберите порт:
+              <strong>Инструменты → Порт</strong> (например, COM3 на Windows или
+              /dev/ttyUSB0 на Linux).
             </p>
           </div>
         </div>
-
         <div class="example-card">
           <h3>💻 Создание веб-сервера</h3>
           <p>Вот базовый код для создания веб-сервера на ESP8266:</p>
-
           <div class="code-block">
             <span class="comment">// Подключаем библиотеки</span>
             <span class="keyword">#include</span> &lt;ESP8266WiFi.h&gt;
@@ -251,17 +124,13 @@
             <span class="keyword">void</span>
             <span class="function">setup</span>() { Serial.begin(115200);
             WiFi.begin(ssid, password);
-
-            <span class="comment">// Ждём подключения</span>
             <span class="keyword">while</span> (WiFi.status() != WL_CONNECTED) {
             delay(500); Serial.print(<span class="string">"."</span>); }
             Serial.println(<span class="string">"Подключено!"</span>);
             Serial.print(<span class="string">"IP-адрес: "</span>);
-            Serial.println(WiFi.localIP());
-
-            <span class="comment">// Обработчик для главной страницы</span>
-            server.on(<span class="string">"/"</span>,
-            <span class="function">handleRoot</span>); server.on(<span
+            Serial.println(WiFi.localIP()); server.on(<span class="string"
+              >"/"</span
+            >, <span class="function">handleRoot</span>); server.on(<span
               class="string"
               >"/on"</span
             >, <span class="function">handleOn</span>); server.on(<span
@@ -272,7 +141,6 @@
             <span class="keyword">void</span>
             <span class="function">loop</span>() { server.handleClient(); }
 
-            <span class="comment">// Страница с управлением светодиодом</span>
             <span class="keyword">void</span>
             <span class="function">handleRoot</span>() { String html =
             <span class="string"
@@ -290,9 +158,7 @@
 
             <span class="keyword">void</span>
             <span class="function">handleOn</span>() { digitalWrite(LED_BUILTIN,
-            LOW);
-            <span class="comment">// Включаем светодиод</span> server.send(200,
-            <span class="string">"text/html"</span>,
+            LOW); server.send(200, <span class="string">"text/html"</span>,
             <span class="string"
               >"&lt;h1&gt;Светодиод ВКЛЮЧЕН&lt;/h1&gt;&lt;p&gt;&lt;a
               href=\"/\"&gt;Назад&lt;/a&gt;&lt;/p&gt;"</span
@@ -300,21 +166,18 @@
 
             <span class="keyword">void</span>
             <span class="function">handleOff</span>() {
-            digitalWrite(LED_BUILTIN, HIGH);
-            <span class="comment">// Выключаем светодиод</span> server.send(200,
+            digitalWrite(LED_BUILTIN, HIGH); server.send(200,
             <span class="string">"text/html"</span>,
             <span class="string"
               >"&lt;h1&gt;Светодиод ВЫКЛЮЧЕН&lt;/h1&gt;&lt;p&gt;&lt;a
               href=\"/\"&gt;Назад&lt;/a&gt;&lt;/p&gt;"</span
             >); }
           </div>
-
           <div class="success-box">
             <strong>✅ Готово!</strong> После загрузки кода, откройте в браузере
             IP-адрес ESP8266, который появится в мониторе порта.
           </div>
         </div>
-
         <div class="example-card">
           <h3>🔬 Практическое задание</h3>
           <ol>
@@ -332,7 +195,6 @@
             ESP8266!
           </p>
         </div>
-
         <div class="example-card">
           <h3>🤖 Дополнительные идеи</h3>
           <ul>
@@ -353,12 +215,9 @@
             </li>
           </ul>
         </div>
-
         <div class="lesson-navigation">
           <a href="urok-5.html">← Урок 5: Соревнование</a>
-          <a href="urok-7.html" style="margin-left: 20px"
-            >Урок 7: Конвертер →</a
-          >
+          <a href="urok-7.html">Урок 7: Конвертер →</a>
         </div>
       </section>
 
@@ -376,7 +235,7 @@
       </footer>
     </div>
 
-    <!-- ФОРМА ВХОДА -->
+    <!-- ===== ФОРМА ВХОДА ===== -->
     <div id="login-form" class="login-container">
       <a
         href="index.html"
@@ -398,7 +257,6 @@
       <div id="errorMessage" class="error-message">
         ❌ Неверный пароль. Попробуйте снова.
       </div>
-
       <div
         style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px"
       >
@@ -411,49 +269,38 @@
     </div>
 
     <script>
-      // ===== ПАРОЛЬ В BASE64 =====
       const encodedPassword = "RVNQODI2Nl9Qcm9fMjAyNSE=";
-
       function checkPassword() {
         const input = document.getElementById("passwordInput");
         const error = document.getElementById("errorMessage");
         const loginForm = document.getElementById("login-form");
         const content = document.getElementById("protected-content");
-
-        // Декодируем пароль из Base64
-        const correctPassword = atob(encodedPassword);
-
-        if (input.value === correctPassword) {
+        const correct = atob(encodedPassword);
+        if (input.value === correct) {
           loginForm.style.display = "none";
           content.style.display = "block";
-          content.style.animation = "fadeIn 0.5s ease-out";
           sessionStorage.setItem("lesson6_access", "true");
         } else {
           error.style.display = "block";
           input.value = "";
-          input.focus();
-          setTimeout(() => {
-            error.style.display = "none";
-          }, 3000);
+          setTimeout(() => (error.style.display = "none"), 3000);
         }
       }
-
-      // Проверка сессии при загрузке
       window.onload = function () {
         if (sessionStorage.getItem("lesson6_access") === "true") {
           document.getElementById("login-form").style.display = "none";
           document.getElementById("protected-content").style.display = "block";
         }
       };
-
-      // Обработка нажатия Enter
       document
         .getElementById("passwordInput")
         .addEventListener("keypress", function (e) {
-          if (e.key === "Enter") {
-            checkPassword();
-          }
+          if (e.key === "Enter") checkPassword();
         });
     </script>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
   </body>
 </html>

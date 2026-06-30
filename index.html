@@ -5,159 +5,731 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WeDo 2.0: Примеры для начинающих</title>
 
+    <!-- ===== BOOTSTRAP 5 ===== -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- ===== FONT AWESOME (иконки) ===== -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
     <!-- Подключаем внешний CSS файл -->
     <link rel="stylesheet" href="styles.css" />
-    <!-- Кнопка "Вниз" -->
+
+    <style>
+      /* ===== ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ===== */
+
+      /* Слайдер — картинка слева, текст справа */
+      .slide-content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 30px;
+        padding: 20px 0;
+      }
+
+      .slide-content .slide-image {
+        flex: 1;
+        max-width: 50%;
+      }
+
+      .slide-content .slide-image img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease;
+      }
+
+      .slide-content .slide-image img:hover {
+        transform: scale(1.02);
+      }
+
+      .slide-content .slide-text {
+        flex: 1;
+        padding: 10px;
+      }
+
+      .slide-content .slide-text h3 {
+        color: #2c3e50;
+        margin-bottom: 15px;
+        font-weight: 600;
+      }
+
+      .slide-content .slide-text p {
+        color: #555;
+        line-height: 1.7;
+      }
+
+      /* Карусель — плавный переход */
+      .carousel-item {
+        transition: transform 0.6s ease-in-out;
+      }
+
+      /* Индикаторы (точки) */
+      .carousel-indicators button {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 2px solid #3498db;
+        background: transparent !important;
+        margin: 0 6px;
+      }
+
+      .carousel-indicators button.active {
+        background: #3498db !important;
+      }
+
+      /* Стрелки навигации */
+      .carousel-control-prev-icon,
+      .carousel-control-next-icon {
+        background-color: #3498db;
+        border-radius: 50%;
+        padding: 20px;
+        background-size: 50%;
+      }
+
+      /* ===== МЕНЮ (кнопка "Уроки" с выпадашкой) ===== */
+      .navbar-custom {
+        background: white;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+        padding: 12px 0;
+        margin-bottom: 30px;
+        border-radius: 12px;
+      }
+
+      .navbar-custom .navbar-brand {
+        font-weight: 700;
+        font-size: 1.4rem;
+        color: #2c3e50;
+      }
+
+      .navbar-custom .navbar-brand span {
+        color: #3498db;
+      }
+
+      .navbar-custom .dropdown-menu {
+        border: none;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        border-radius: 12px;
+        padding: 10px 0;
+      }
+
+      .navbar-custom .dropdown-item {
+        padding: 10px 24px;
+        font-weight: 500;
+        color: #2c3e50;
+        transition: all 0.2s ease;
+      }
+
+      .navbar-custom .dropdown-item:hover {
+        background: #f0f7ff;
+        color: #3498db;
+        padding-left: 30px;
+      }
+
+      .navbar-custom .dropdown-item i {
+        width: 24px;
+        color: #3498db;
+        margin-right: 8px;
+      }
+
+      .navbar-custom .dropdown-item .badge-exclusive {
+        background: #e74c3c;
+        color: white;
+        font-size: 10px;
+        padding: 2px 8px;
+        border-radius: 20px;
+        margin-left: 8px;
+      }
+
+      .navbar-custom .btn-lessons {
+        background: #3498db;
+        color: white;
+        padding: 10px 28px;
+        border-radius: 30px;
+        font-weight: 600;
+        border: none;
+        transition: all 0.3s ease;
+      }
+
+      .navbar-custom .btn-lessons:hover {
+        background: #2980b9;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+      }
+
+      /* Адаптив для мобильных */
+      @media (max-width: 768px) {
+        .slide-content {
+          flex-direction: column;
+        }
+
+        .slide-content .slide-image {
+          max-width: 100%;
+        }
+
+        .slide-content .slide-image img {
+          height: 200px;
+        }
+
+        .navbar-custom .navbar-brand {
+          font-size: 1.1rem;
+        }
+
+        .navbar-custom .btn-lessons {
+          padding: 6px 16px;
+          font-size: 14px;
+        }
+      }
+
+      /* Кнопка "Вниз" (стрелка) */
+      .scroll-down {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: #3498db;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+        transition: all 0.3s ease;
+        z-index: 1000;
+        cursor: pointer;
+        animation: bounce 2s infinite;
+      }
+
+      .scroll-down:hover {
+        background: #2980b9;
+        transform: scale(1.1);
+        box-shadow: 0 6px 25px rgba(52, 152, 219, 0.6);
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-10px);
+        }
+        60% {
+          transform: translateY(-5px);
+        }
+      }
+
+      /* Футер */
+      footer {
+        margin-top: 50px;
+        padding: 30px 20px;
+        background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+        color: white;
+        text-align: center;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+      }
+
+      footer::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.05) 0%,
+          transparent 70%
+        );
+        animation: rotate 20s linear infinite;
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      footer * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .footer-divider {
+        max-width: 200px;
+        margin: 20px auto;
+        border: none;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 2px;
+      }
+
+      .lesson-nav ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .lesson-nav ul li {
+        margin: 0;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 0;
+        transition: background 0.3s ease;
+      }
+
+      .lesson-nav ul li:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .lesson-nav ul li a {
+        display: block;
+        padding: 8px 18px;
+        color: white;
+        text-decoration: none;
+        font-size: 0.95em;
+        transition: transform 0.3s ease;
+      }
+
+      .lesson-nav ul li a:hover {
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 600px) {
+        .lesson-nav ul {
+          flex-direction: column;
+          align-items: center;
+        }
+        .lesson-nav ul li {
+          width: 80%;
+        }
+      }
+
+      /* Адаптив для мобильных */
+      @media (max-width: 600px) {
+        .scroll-down {
+          width: 40px;
+          height: 40px;
+          font-size: 22px;
+          bottom: 20px;
+          right: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- ============================================================ -->
+      <!-- ВЕРХНЕЕ МЕНЮ С КНОПКОЙ "УРОКИ" -->
+      <!-- ============================================================ -->
+      <nav class="navbar-custom">
+        <div
+          class="container-fluid d-flex justify-content-between align-items-center"
+        >
+          <a class="navbar-brand" href="#"> 🤖 WeDo <span>2.0</span> </a>
+
+          <!-- Кнопка "Уроки" с выпадающим меню -->
+          <div class="dropdown">
+            <button
+              class="btn-lessons dropdown-toggle"
+              type="button"
+              id="lessonsDropdown"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              📚 Уроки
+            </button>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="lessonsDropdown"
+            >
+              <li>
+                <a class="dropdown-item" href="urok-1.html"
+                  ><i class="fas fa-rocket"></i> Урок 1: Знакомство</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="urok-2.html"
+                  ><i class="fas fa-microchip"></i> Урок 2: Моторы</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="urok-3.html"
+                  ><i class="fas fa-satellite-dish"></i> Урок 3: Датчики</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="urok-4.html"
+                  ><i class="fas fa-code"></i> Урок 4: Программирование</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="urok-5.html"
+                  ><i class="fas fa-flag-checkered"></i> Урок 5: Проект</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="urok-6.html"
+                  ><i class="fas fa-lock"></i> Урок 6: ESP8266
+                  <span class="badge-exclusive">Эксклюзив</span></a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="urok-7.html"
+                  ><i class="fas fa-calculator"></i> Урок 7: Конвертер
+                  <span class="badge-exclusive">Эксклюзив</span></a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="urok-8.html"
+                  ><i class="fas fa-wifi"></i> Урок 8: Связь ESP
+                  <span class="badge-exclusive">Эксклюзив</span></a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="teacher-panel.html"
+                  ><i class="fas fa-chalkboard-teacher"></i> 👨‍🏫 Панель
+                  учителя</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- ============================================================ -->
+      <!-- ЗАГОЛОВОК -->
+      <!-- ============================================================ -->
+      <header class="text-center my-4">
+        <h1 class="display-5 fw-bold">
+          WeDo 2.0: Стартовые проекты для новичков
+        </h1>
+        <p class="lead text-muted">
+          Базовые примеры для освоения робототехники с LEGO Education WeDo 2.0
+        </p>
+      </header>
+
+      <!-- ============================================================ -->
+      <!-- СЛАЙД-ШОУ (карусель) -->
+      <!-- ============================================================ -->
+      <div
+        id="mainCarousel"
+        class="carousel slide carousel-fade"
+        data-bs-ride="carousel"
+      >
+        <!-- Индикаторы (точки) -->
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#mainCarousel"
+            data-bs-slide-to="0"
+            class="active"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#mainCarousel"
+            data-bs-slide-to="1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#mainCarousel"
+            data-bs-slide-to="2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#mainCarousel"
+            data-bs-slide-to="3"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#mainCarousel"
+            data-bs-slide-to="4"
+          ></button>
+        </div>
+
+        <!-- Слайды -->
+        <div class="carousel-inner">
+          <!-- СЛАЙД 1: Lego WeDo 2.0 -->
+          <div class="carousel-item active">
+            <div class="slide-content">
+              <div class="slide-image">
+                <img
+                  src="img/RebenokSoberaetWeDo2.jpg"
+                  alt="Ребёнок собирает Lego WeDo 2.0"
+                />
+              </div>
+              <div class="slide-text">
+                <h3>🧒 Lego WeDo 2.0</h3>
+                <p>
+                  <strong>Ребёнок собирает конструкцию из Lego WeDo 2.0</strong
+                  ><br />
+                  На наших занятиях ребёнок с удовольствием собирает из
+                  конструктора Lego WeDo 2.0, ИИ индивидуально подберёт к нему
+                  программу обучения, отвечая на его запросы и интересы 😊
+                </p>
+                <span class="badge bg-primary">Популярное</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- СЛАЙД 2: Дети в коллективе -->
+          <div class="carousel-item">
+            <div class="slide-content">
+              <div class="slide-image">
+                <img src="img/DetiPomog-t.jpg" alt="Дети помогают друг другу" />
+              </div>
+              <div class="slide-text">
+                <h3>🤝 Дети в коллективе</h3>
+                <p>
+                  <strong>Дети сообща помогают друг другу.</strong><br />
+                  Тем самым они развивают в себе коммуникативность, учатся
+                  работать в команде и поддерживать друг друга.
+                </p>
+                <span class="badge bg-success">Команда</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- СЛАЙД 3: Гоночный автомобиль -->
+          <div class="carousel-item">
+            <div class="slide-content">
+              <div class="slide-image">
+                <img
+                  src="img/gono4-prepyatstvie.jpg"
+                  alt="Гоночный автомобиль"
+                />
+              </div>
+              <div class="slide-text">
+                <h3>🏎️ Гоночный автомобиль</h3>
+                <p>
+                  <strong>Модель с мотором и датчиком движения</strong><br />
+                  Реагирует на препятствия. Идеальный проект для изучения основ
+                  робототехники и программирования.
+                </p>
+                <span class="badge bg-warning text-dark">Скорость</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- СЛАЙД 4: Вентилятор -->
+          <div class="carousel-item">
+            <div class="slide-content">
+              <div class="slide-image">
+                <img src="img/ventilyator.jpg" alt="Вентилятор" />
+              </div>
+              <div class="slide-text">
+                <h3>🌀 Вентилятор</h3>
+                <p>
+                  <strong
+                    >Использование редукции для изменения скорости
+                    вращения.</strong
+                  ><br />
+                  Практический проект для изучения механических передач и
+                  управления скоростью.
+                </p>
+                <span class="badge bg-info text-dark">Механика</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- СЛАЙД 5: Программирование -->
+          <div class="carousel-item">
+            <div class="slide-content">
+              <div class="slide-image">
+                <img src="img/gono4-prepyatstvie.jpg" alt="Программирование" />
+              </div>
+              <div class="slide-text">
+                <h3>💻 Программирование</h3>
+                <p>
+                  <strong>Базовые блоки программирования:</strong>
+                </p>
+                <ul>
+                  <li>Запуск/остановка мотора</li>
+                  <li>Циклы повторения</li>
+                  <li>Реакция на датчик наклона</li>
+                </ul>
+                <span class="badge bg-dark">Код</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Стрелки навигации -->
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#mainCarousel"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon"></span>
+          <span class="visually-hidden">Назад</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#mainCarousel"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon"></span>
+          <span class="visually-hidden">Вперёд</span>
+        </button>
+      </div>
+
+      <!-- ============================================================ -->
+      <!-- РЕСУРСЫ -->
+      <!-- ============================================================ -->
+      <section id="resources" class="mt-5 p-4 bg-light rounded-4">
+        <h2 class="text-center mb-3">📚 Где найти материалы</h2>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <i class="fas fa-globe text-primary me-2"></i>
+            Официальный сайт LEGO Education → раздел "WeDo 2.0 Curriculum"
+          </li>
+          <li class="list-group-item">
+            <i class="fab fa-youtube text-danger me-2"></i>
+            YouTube: каналы с тегами #WeDo2 и #LegoEducation
+          </li>
+          <li class="list-group-item">
+            <i class="fab fa-scratch text-warning me-2"></i>
+            Сообщество Scratch: проекты с интеграцией WeDo
+          </li>
+        </ul>
+      </section>
+    </div>
+    <!-- /container -->
+
+    <!-- ============================================================ -->
+    <!-- ФУТЕР -->
+    <!-- ============================================================ -->
+    <footer id="footer">
+      <div class="container">
+        <div class="footer-content">
+          <nav class="lesson-nav">
+            <h4>📚 Уроки</h4>
+            <ul>
+              <li><a href="urok-1.html">Урок 1: Знакомство</a></li>
+              <li><a href="urok-2.html">Урок 2: Моторы</a></li>
+              <li><a href="urok-3.html">Урок 3: Датчики</a></li>
+              <li><a href="urok-4.html">Урок 4: Программирование</a></li>
+              <li><a href="urok-5.html">Урок 5: Проект</a></li>
+              <li><a href="urok-6.html">Урок 6: Продвинутый 🔐</a></li>
+              <li><a href="urok-7.html">Урок 7: Конвертер 📐</a></li>
+              <li><a href="urok-8.html">Урок 8: Связь ESP 📡</a></li>
+              <li><a href="teacher-panel.html">👨‍🏫 Панель учителя</a></li>
+            </ul>
+          </nav>
+
+          <hr class="footer-divider" />
+
+          <p>© 2026 WeDo 2.0 Образовательная платформа</p>
+          <p>Для некоммерческого использования</p>
+          <p style="font-size: 0.9em; opacity: 0.8">
+            📧 Контакты: support@wedo-learning.ru
+          </p>
+
+          <form
+            action="https://formspree.io/f/ваш-id"
+            method="POST"
+            style="max-width: 400px; margin: 20px auto"
+          >
+            <input
+              type="email"
+              name="email"
+              placeholder="Ваш email"
+              required
+              style="
+                width: 100%;
+                padding: 12px;
+                border-radius: 8px;
+                border: none;
+                margin-bottom: 10px;
+              "
+            />
+            <textarea
+              name="message"
+              placeholder="Сообщение"
+              required
+              style="
+                width: 100%;
+                padding: 12px;
+                border-radius: 8px;
+                border: none;
+                margin-bottom: 10px;
+              "
+            ></textarea>
+            <button
+              type="submit"
+              style="
+                padding: 12px 30px;
+                background: white;
+                color: #2c3e50;
+                font-weight: bold;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+              "
+            >
+              ✉️ Отправить
+            </button>
+          </form>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== КНОПКА "ВНИЗ" ===== -->
     <a href="#footer" class="scroll-down" aria-label="Перейти к подвалу">
       <span class="arrow-down">↓</span>
     </a>
-  </head>
-  <body>
-    <header>
-      <h1>WeDo 2.0: Стартовые проекты для новичков</h1>
-      <p>
-        Базовые примеры для освоения робототехники с LEGO Education WeDo 2.0
-      </p>
-    </header>
 
-    <h2>Lego WeDo 2.0</h2>
-    <div class="example-card">
-      <div
-        class="alt-description"
-        role="img"
-        aria-label="Пример: Ребёнок собирает конструкцию из Lego"
-      >
-        <strong>Ребёнок собирает конструкцию из Lego WeDo 2.0</strong><br />
-        <img
-          src="img/RebenokSoberaetWeDo2.jpg"
-          alt="gono4-prepyatstvie"
-          width="700"
-        /><br />
-        Особенности: На наших занятиях ребёнок с удовольствием собирает из
-        конструктора Lego WeDo 2.0, ИИ индивидуально подберёт к нему программу
-        обучения отвечая на его запросы и интересы ;-)
-      </div>
-    </div>
+    <!-- ============================================================ -->
+    <!-- СКРИПТЫ: JQUERY + BOOTSTRAP -->
+    <!-- ============================================================ -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <h2>Дети в коллективе</h2>
-    <div class="example-card">
-      <div
-        class="alt-description"
-        role="img"
-        aria-label="Пример: сообща помогают друг другу"
-      >
-        <strong>Дети сообща помогают друг другу.</strong><br />
-        <img
-          src="img/DetiPomog-t.jpg"
-          alt="gono4-prepyatstvie"
-          width="700"
-        /><br />
-        Особенности: Тем самым они развивают в себе коммуникативность.
-      </div>
-    </div>
+    <!-- Дополнительный скрипт для эффектов -->
+    <script>
+      $(document).ready(function () {
+        // Автозапуск карусели (уже включён через data-bs-ride)
+        // Дополнительный эффект: плавное появление при загрузке
+        $(".carousel-item").css("transition", "transform 0.8s ease-in-out");
 
-    <section id="basic-projects">
-      <h2>Простые модели</h2>
+        // Обработка клика на стрелку вниз
+        $(".scroll-down").on("click", function (e) {
+          e.preventDefault();
+          $("html, body").animate(
+            {
+              scrollTop: $("#footer").offset().top,
+            },
+            600,
+          );
+        });
 
-      <div class="example-card">
-        <div
-          class="alt-description"
-          role="img"
-          aria-label="Пример: Гоночный автомобиль"
-        >
-          <strong>Пример 1: Гоночный автомобиль </strong><br />
-          <img
-            src="img/gono4-prepyatstvie.jpg"
-            alt="gono4-prepyatstvie"
-            width="700"
-          /><br />
-          Особенности: Модель с мотором и датчиком движения, реагирует на
-          препятствия.
-        </div>
-      </div>
-
-      <div class="example-card">
-        <div
-          class="alt-description"
-          role="img"
-          aria-label="Пример: Вращающийся вентилятор"
-        >
-          <strong>Пример 2: Вентилятор</strong><br />
-          <img
-            width="700"
-            src="img/ventilyator.jpg"
-            alt="ventilyator"
-            srcset="./img/ventilyator.jpg 800w, ./img/bot.png 500w"
-          /><br />
-          Особенности: Использование редукции для изменения скорости вращения.
-        </div>
-      </div>
-    </section>
-
-    <section id="programming">
-      <h2>Программирование</h2>
-
-      <div class="example-card">
-        <div
-          class="alt-description"
-          role="img"
-          aria-label="Блок-схема: Управление мотором"
-        >
-          <strong>Базовые блоки:</strong>
-          <ul>
-            <li>Запуск/остановка мотора</li>
-            <li>Циклы повторения</li>
-            <li>Реакция на датчик наклона</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="resources">
-      <h2>Где найти материалы</h2>
-      <ul>
-        <li>Официальный сайт LEGO Education → раздел "WeDo 2.0 Curriculum"</li>
-        <li>YouTube: каналы с тегами #WeDo2 и #LegoEducation</li>
-        <li>Сообщество Scratch: проекты с интеграцией WeDo</li>
-      </ul>
-    </section>
-
-    <!-- МОДЕРНИЗИРОВАННЫЙ ФУТЕР -->
-    <footer>
-      <footer id="footer"></footer>
-      <div class="footer-content">
-        <!-- Навигация по урокам -->
-        <nav class="lesson-nav">
-          <h4>📚 Уроки</h4>
-          <ul>
-            <li><a href="urok-1.html">Урок 1: Знакомство</a></li>
-            <li><a href="urok-2.html">Урок 2: Моторы</a></li>
-            <li><a href="urok-3.html">Урок 3: Датчики</a></li>
-            <li><a href="urok-4.html">Урок 4: Программирование</a></li>
-            <li><a href="urok-5.html">Урок 5: Проект</a></li>
-            <li>
-              <a href="urok-6.html">Урок 6: Продвинутый (эксклюзив) 🔐</a>
-            </li>
-            <li><a href="urok-7.html">Урок 7: Конвертер единиц 📐</a></li>
-            <li><a href="urok-8.html">Урок 8: Связь ESP8266 📡</a></li>
-            <li><a href="teacher-panel.html">👨‍🏫 Панель учителя</a></li>
-          </ul>
-        </nav>
-
-        <hr class="footer-divider" />
-
-        <p>© 2026 WeDo 2.0 Образовательная платформа</p>
-        <p>Для некоммерческого использования</p>
-        <p style="font-size: 0.9em; opacity: 0.8">
-          📧 Контакты: support@wedo-learning.ru
-        </p>
-
-        <form action="https://formspree.io/f/ваш-id" method="POST">
-          <input type="email" name="email" placeholder="Ваш email" required />
-          <textarea name="message" placeholder="Сообщение" required></textarea>
-          <button type="submit">✉️ Отправить</button>
-        </form>
-      </div>
-    </footer>
+        console.log("🚀 WeDo 2.0 с Bootstrap и jQuery загружен!");
+      });
+    </script>
   </body>
 </html>

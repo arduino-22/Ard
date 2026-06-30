@@ -11,7 +11,8 @@
     <script src="assets/js/jquery.min.js"></script>
     <!-- ===== BOOTSTRAP 5 ===== -->
     <script src="assets/js/bootstrap.bundle.min.js"></script>
-
+    <!-- ===== ЛОКАЛЬНЫЕ СКРИПТЫ ===== -->
+    <script src="assets/js/main.js"></script>
     <!-- Подключаем внешний CSS файл -->
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -26,83 +27,86 @@
         >
           <a class="navbar-brand" href="#"> 🤖 WeDo <span>2.0</span> </a>
 
-          <!-- Кнопка "Уроки" с выпадающим меню -->
-          <div class="dropdown">
+          <div class="d-flex align-items-center gap-2">
+            <!-- Кнопка "Уроки" с выпадающим меню -->
+            <div class="dropdown">
+              <button
+                class="btn-lessons dropdown-toggle"
+                type="button"
+                id="lessonsDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                📚 Уроки
+              </button>
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="lessonsDropdown"
+              >
+                <li>
+                  <a class="dropdown-item" href="urok-1.html"
+                    ><i class="fas fa-rocket"></i> Урок 1: Знакомство</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="urok-2.html"
+                    ><i class="fas fa-microchip"></i> Урок 2: Моторы</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="urok-3.html"
+                    ><i class="fas fa-satellite-dish"></i> Урок 3: Датчики</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="urok-4.html"
+                    ><i class="fas fa-code"></i> Урок 4: Программирование</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="urok-5.html"
+                    ><i class="fas fa-flag-checkered"></i> Урок 5: Проект</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="urok-6.html"
+                    ><i class="fas fa-lock"></i> Урок 6: ESP8266
+                    <span class="badge-exclusive">Эксклюзив</span></a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="urok-7.html"
+                    ><i class="fas fa-calculator"></i> Урок 7: Конвертер
+                    <span class="badge-exclusive">Эксклюзив</span></a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="urok-8.html"
+                    ><i class="fas fa-wifi"></i> Урок 8: Связь ESP
+                    <span class="badge-exclusive">Эксклюзив</span></a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="teacher-panel.html"
+                    ><i class="fas fa-chalkboard-teacher"></i> 👨‍🏫 Панель
+                    учителя</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <!-- Кнопка переключения темы -->
             <button
-              class="btn-lessons dropdown-toggle"
-              type="button"
-              id="lessonsDropdown"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
+              id="themeToggle"
+              class="btn-theme-toggle"
+              aria-label="Переключить тему"
             >
-              📚 Уроки
+              <i class="fas fa-moon"></i>
             </button>
-            <ul
-              class="dropdown-menu dropdown-menu-end"
-              aria-labelledby="lessonsDropdown"
-            >
-              <li>
-                <a class="dropdown-item" href="urok-1.html"
-                  ><i class="fas fa-rocket"></i> Урок 1: Знакомство</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item" href="urok-2.html"
-                  ><i class="fas fa-microchip"></i> Урок 2: Моторы</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item" href="urok-3.html"
-                  ><i class="fas fa-satellite-dish"></i> Урок 3: Датчики</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item" href="urok-4.html"
-                  ><i class="fas fa-code"></i> Урок 4: Программирование</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item" href="urok-5.html"
-                  ><i class="fas fa-flag-checkered"></i> Урок 5: Проект</a
-                >
-              </li>
-              <li><hr class="dropdown-divider" /></li>
-              <li>
-                <a class="dropdown-item" href="urok-6.html"
-                  ><i class="fas fa-lock"></i> Урок 6: ESP8266
-                  <span class="badge-exclusive">Эксклюзив</span></a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item" href="urok-7.html"
-                  ><i class="fas fa-calculator"></i> Урок 7: Конвертер
-                  <span class="badge-exclusive">Эксклюзив</span></a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item" href="urok-8.html"
-                  ><i class="fas fa-wifi"></i> Урок 8: Связь ESP
-                  <span class="badge-exclusive">Эксклюзив</span></a
-                >
-              </li>
-              <li><hr class="dropdown-divider" /></li>
-              <li>
-                <a class="dropdown-item" href="teacher-panel.html"
-                  ><i class="fas fa-chalkboard-teacher"></i> 👨‍🏫 Панель
-                  учителя</a
-                >
-              </li>
-            </ul>
           </div>
         </div>
-        <!-- Кнопка переключения темы -->
-        <button
-          id="themeToggle"
-          class="btn-theme-toggle"
-          aria-label="Переключить тему"
-        >
-          <i class="fas fa-moon"></i>
-        </button>
       </nav>
 
       <!-- ============================================================ -->
@@ -390,25 +394,5 @@
     </a>
 
     <!-- Дополнительный скрипт для эффектов -->
-    <script>
-      $(document).ready(function () {
-        // Автозапуск карусели (уже включён через data-bs-ride)
-        // Дополнительный эффект: плавное появление при загрузке
-        $(".carousel-item").css("transition", "transform 0.8s ease-in-out");
-
-        // Обработка клика на стрелку вниз
-        $(".scroll-down").on("click", function (e) {
-          e.preventDefault();
-          $("html, body").animate(
-            {
-              scrollTop: $("#footer").offset().top,
-            },
-            600,
-          );
-        });
-
-        console.log("🚀 WeDo 2.0 с Bootstrap и jQuery загружен!");
-      });
-    </script>
   </body>
 </html>

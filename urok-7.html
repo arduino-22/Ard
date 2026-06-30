@@ -6,201 +6,6 @@
     <title>Урок 7: ESP8266 + Конвертер</title>
     <meta name="robots" content="noindex, nofollow" />
     <link rel="stylesheet" href="styles.css" />
-    <style>
-      /* ===== Стили для входа ===== */
-      .login-container {
-        max-width: 400px;
-        margin: 50px auto;
-        padding: 30px;
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        text-align: center;
-      }
-      .login-container h2 {
-        margin-bottom: 20px;
-        color: #2c3e50;
-      }
-      .login-container input {
-        width: 100%;
-        padding: 12px;
-        margin: 10px 0;
-        border: 2px solid #ddd;
-        border-radius: 8px;
-        font-size: 16px;
-        box-sizing: border-box;
-      }
-      .login-container input:focus {
-        border-color: #3498db;
-        outline: none;
-      }
-      .login-container button {
-        width: 100%;
-        padding: 12px;
-        background: #3498db;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-      }
-      .login-container button:hover {
-        background: #2980b9;
-      }
-      .error-message {
-        color: #e74c3c;
-        margin: 10px 0;
-        display: none;
-      }
-      .encrypted-content {
-        display: none;
-      }
-      .login-nav {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        padding: 0 5px;
-      }
-      .login-nav a {
-        color: #3498db;
-        text-decoration: none;
-        font-size: 15px;
-        font-weight: 500;
-        transition: color 0.3s ease;
-      }
-      .login-nav a:hover {
-        color: #1a6da8;
-        text-decoration: underline;
-      }
-
-      /* ===== Стили для кода ===== */
-      .code-block {
-        background: #1e1e2e;
-        color: #cdd6f4;
-        padding: 20px;
-        border-radius: 8px;
-        overflow-x: auto;
-        font-family: "Courier New", monospace;
-        font-size: 14px;
-        line-height: 1.7;
-        margin: 15px 0;
-        white-space: pre-wrap;
-        word-break: break-all;
-        border-left: 4px solid #3498db;
-      }
-      .code-block .comment {
-        color: #6c7086;
-        font-style: italic;
-      }
-      .code-block .keyword {
-        color: #cba6f7;
-        font-weight: bold;
-      }
-      .code-block .string {
-        color: #a6e3a1;
-      }
-      .code-block .function {
-        color: #89b4fa;
-      }
-      .code-block .number {
-        color: #f9e2af;
-      }
-      .code-block .preprocessor {
-        color: #f38ba8;
-      }
-
-      .copy-btn {
-        display: inline-block;
-        margin: 10px 0;
-        padding: 8px 20px;
-        background: #27ae60;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-        transition: background 0.3s ease;
-      }
-      .copy-btn:hover {
-        background: #219a52;
-      }
-
-      .step-card {
-        border-left: 4px solid #3498db;
-        padding: 15px 20px;
-        background: #f8f9fa;
-        border-radius: 4px;
-        margin: 15px 0;
-      }
-      .step-card h4 {
-        margin-top: 0;
-        color: #2c3e50;
-      }
-      .step-card .step-number {
-        display: inline-block;
-        background: #3498db;
-        color: white;
-        border-radius: 50%;
-        width: 28px;
-        height: 28px;
-        text-align: center;
-        line-height: 28px;
-        font-weight: bold;
-        margin-right: 10px;
-      }
-
-      .warning {
-        background: #fff3cd;
-        border-left: 4px solid #ffc107;
-        padding: 15px;
-        border-radius: 4px;
-        margin: 15px 0;
-      }
-      .warning strong {
-        color: #856404;
-      }
-
-      .success-box {
-        background: #d4edda;
-        border-left: 4px solid #28a745;
-        padding: 15px;
-        border-radius: 4px;
-        margin: 15px 0;
-      }
-      .success-box strong {
-        color: #155724;
-      }
-
-      .lesson-navigation {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 30px;
-        padding: 20px 0;
-        border-top: 2px solid #eee;
-      }
-      .lesson-navigation a {
-        display: inline-block;
-        padding: 10px 25px;
-        background: #3498db;
-        color: white;
-        border-radius: 8px;
-        text-decoration: none;
-        transition:
-          background 0.3s ease,
-          transform 0.3s ease;
-      }
-      .lesson-navigation a:hover {
-        background: #2980b9;
-        transform: scale(1.05);
-      }
-      .lesson-navigation a:first-child {
-        background: #7f8c8d;
-      }
-      .lesson-navigation a:first-child:hover {
-        background: #616a6b;
-      }
-    </style>
   </head>
   <body>
     <!-- ============================================================ -->
@@ -208,6 +13,23 @@
     <!-- ============================================================ -->
     <div id="protected-content" class="encrypted-content">
       <header>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <h1>📘 Урок 1: Знакомство с WeDo 2.0</h1>
+          <button
+            id="themeToggle"
+            class="btn-theme-toggle"
+            aria-label="Переключить тему"
+          >
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
+        <p><a href="index.html" style="color: #3498db">← На главную</a></p>
         <h1>🔌 Урок 7: ESP8266 + Конвертер единиц</h1>
         <p><a href="index.html" style="color: #3498db">← На главную</a></p>
       </header>
@@ -638,5 +460,9 @@
           }
         });
     </script>
+    <!-- ===== ПОДКЛЮЧЕНИЕ СКРИПТОВ ===== -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
   </body>
 </html>

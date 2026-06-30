@@ -6,142 +6,6 @@
     <title>Урок 6: ESP8266 — Веб-сервер</title>
     <meta name="robots" content="noindex, nofollow" />
     <link rel="stylesheet" href="styles.css" />
-    <style>
-      /* Стили для страницы входа */
-      .login-container {
-        max-width: 400px;
-        margin: 50px auto;
-        padding: 30px;
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        text-align: center;
-      }
-
-      .login-container h2 {
-        margin-bottom: 20px;
-        color: #2c3e50;
-      }
-
-      .login-container input {
-        width: 100%;
-        padding: 12px;
-        margin: 10px 0;
-        border: 2px solid #ddd;
-        border-radius: 8px;
-        font-size: 16px;
-        box-sizing: border-box;
-      }
-
-      .login-container input:focus {
-        border-color: #3498db;
-        outline: none;
-      }
-
-      .login-container button {
-        width: 100%;
-        padding: 12px;
-        background: #3498db;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-      }
-
-      .login-container button:hover {
-        background: #2980b9;
-      }
-
-      .error-message {
-        color: #e74c3c;
-        margin: 10px 0;
-        display: none;
-      }
-
-      .encrypted-content {
-        display: none;
-      }
-
-      /* Стили для кода */
-      .code-block {
-        background: #2c3e50;
-        color: #ecf0f1;
-        padding: 20px;
-        border-radius: 8px;
-        overflow-x: auto;
-        font-family: "Courier New", monospace;
-        font-size: 14px;
-        line-height: 1.6;
-        margin: 15px 0;
-        white-space: pre-wrap;
-        word-break: break-all;
-      }
-
-      .code-block .comment {
-        color: #7f8c8d;
-      }
-      .code-block .keyword {
-        color: #e74c3c;
-      }
-      .code-block .string {
-        color: #f1c40f;
-      }
-      .code-block .function {
-        color: #3498db;
-      }
-
-      .step-card {
-        border-left: 4px solid #3498db;
-        padding: 15px 20px;
-        background: #f8f9fa;
-        border-radius: 4px;
-        margin: 15px 0;
-      }
-
-      .step-card h4 {
-        margin-top: 0;
-        color: #2c3e50;
-      }
-
-      .step-card .step-number {
-        display: inline-block;
-        background: #3498db;
-        color: white;
-        border-radius: 50%;
-        width: 28px;
-        height: 28px;
-        text-align: center;
-        line-height: 28px;
-        font-weight: bold;
-        margin-right: 10px;
-      }
-
-      .warning {
-        background: #fff3cd;
-        border-left: 4px solid #ffc107;
-        padding: 15px;
-        border-radius: 4px;
-        margin: 15px 0;
-      }
-
-      .warning strong {
-        color: #856404;
-      }
-
-      .success-box {
-        background: #d4edda;
-        border-left: 4px solid #28a745;
-        padding: 15px;
-        border-radius: 4px;
-        margin: 15px 0;
-      }
-
-      .success-box strong {
-        color: #155724;
-      }
-    </style>
   </head>
   <body>
     <!-- ЗАЩИЩЁННЫЙ КОНТЕНТ (виден только после ввода пароля) -->
@@ -150,6 +14,23 @@
         <h1>🚀 Урок 6: Веб-сервер на ESP8266</h1>
         <p><a href="index.html" style="color: #3498db">← На главную</a></p>
       </header>
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        <h1>📘 Урок 1: Знакомство с WeDo 2.0</h1>
+        <button
+          id="themeToggle"
+          class="btn-theme-toggle"
+          aria-label="Переключить тему"
+        >
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+      <p><a href="index.html" style="color: #3498db">← На главную</a></p>
 
       <section class="lesson-content">
         <h2>Тема: Программирование ESP8266 и создание веб-сервера</h2>
@@ -455,5 +336,9 @@
           }
         });
     </script>
+    <!-- ===== ПОДКЛЮЧЕНИЕ СКРИПТОВ ===== -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
   </body>
 </html>

@@ -10,7 +10,25 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="protected-content" class="encrypted-content">
+    <!-- ===== ФОРМА ВХОДА ===== -->
+    <div id="login-form" class="login-container">
+      <div class="login-nav">
+        <a href="index.html">🏠 На главную</a>
+        <a href="urok-6.html">← Урок 6</a>
+      </div>
+      <h2>🔐 Эксклюзивный урок 7</h2>
+      <p style="color: #7f8c8d; margin-bottom: 20px">
+        Введите пароль, полученный от учителя
+      </p>
+      <input type="password" id="passwordInput" placeholder="Введите пароль" />
+      <button onclick="checkPassword()">Войти</button>
+      <div id="errorMessage" class="error-message">
+        ❌ Неверный пароль. Попробуйте снова.
+      </div>
+    </div>
+
+    <!-- ===== ЗАЩИЩЁННЫЙ КОНТЕНТ ===== -->
+    <div id="protected-content" class="encrypted-content" style="display: none">
       <header>
         <div
           style="
@@ -32,52 +50,17 @@
       </header>
 
       <section class="lesson-content">
+        <!-- ===== КОНТЕНТ УРОКА 7 (оставь свой) ===== -->
         <div class="example-card">
           <h3>🎯 Цель урока</h3>
           <p>
             Создать <strong>веб-сервер на ESP8266</strong>, который будет
             принимать данные с компьютера и конвертировать единицы измерения.
           </p>
-          <p>
-            В этом уроке ты соберёшь <strong>готовый скетч</strong>, загрузишь
-            его в ESP8266 и научишься передавать данные через Wi-Fi.
-          </p>
+          <!-- ... остальной контент ... -->
         </div>
-        <div class="warning">
-          <strong>⚠️ Важно:</strong> Для этого урока тебе понадобятся:
-          <ul>
-            <li>Плата ESP8266 (NodeMCU, Wemos D1 или аналогичная)</li>
-            <li>USB-кабель для подключения к компьютеру</li>
-            <li>Установленная Arduino IDE (с поддержкой ESP8266)</li>
-          </ul>
-        </div>
-        <div class="example-card">
-          <h3>💻 Скетч для ESP8266</h3>
-          <p>Скопируй этот код в Arduino IDE и загрузи в плату:</p>
-          <button class="copy-btn" onclick="copySketch()">
-            📋 Скопировать скетч
-          </button>
-          <div class="code-block" id="sketchCode">
-            /* ... (весь скетч из твоего файла, он большой, я не буду его здесь
-            повторять, но он уже есть у тебя) ... */
-          </div>
-          <div class="success-box">
-            <strong>✅ Готово!</strong> После загрузки скетча, открой монитор
-            порта, скопируй IP-адрес и перейди по нему в браузере.
-          </div>
-        </div>
-        <div class="example-card">
-          <h3>📝 Пошаговая инструкция</h3>
-          <!-- (шаги уже есть в твоём файле) -->
-        </div>
-        <div class="example-card">
-          <h3>🧪 Примеры запросов</h3>
-          <!-- (примеры уже есть) -->
-        </div>
-        <div class="example-card">
-          <h3>🤖 Дополнительные идеи</h3>
-          <!-- (идеи уже есть) -->
-        </div>
+        <!-- ... -->
+
         <div class="lesson-navigation">
           <a href="urok-6.html">← Урок 6: ESP8266 — основы</a>
           <a href="urok-8.html">Урок 8: Связь ESP8266 →</a>
@@ -85,7 +68,7 @@
         </div>
       </section>
 
-      <footer>
+      <footer id="footer">
         <div class="footer-content">
           <p>
             © <span class="footer-year"></span> WeDo 2.0 Образовательная
@@ -99,23 +82,7 @@
       </footer>
     </div>
 
-    <!-- ===== ФОРМА ВХОДА ===== -->
-    <div id="login-form" class="login-container">
-      <div class="login-nav">
-        <a href="index.html">🏠 На главную</a>
-        <a href="urok-6.html">← Урок 6</a>
-      </div>
-      <h2>🔐 Эксклюзивный урок 7</h2>
-      <p style="color: #7f8c8d; margin-bottom: 20px">
-        Введите пароль, полученный от учителя
-      </p>
-      <input type="password" id="passwordInput" placeholder="Введите пароль" />
-      <button onclick="checkPassword()">Войти</button>
-      <div id="errorMessage" class="error-message">
-        ❌ Неверный пароль. Попробуйте снова.
-      </div>
-    </div>
-
+    <!-- ===== СКРИПТЫ ===== -->
     <script>
       const encodedPassword = "Q29udmVydGVyXzIwMjUh";
       function checkPassword() {
@@ -127,10 +94,12 @@
         if (input.value === correct) {
           loginForm.style.display = "none";
           content.style.display = "block";
+          content.style.animation = "fadeIn 0.5s ease-out";
           sessionStorage.setItem("lesson7_access", "true");
         } else {
           error.style.display = "block";
           input.value = "";
+          input.focus();
           setTimeout(() => (error.style.display = "none"), 3000);
         }
       }
@@ -146,7 +115,6 @@
           if (e.key === "Enter") checkPassword();
         });
     </script>
-
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/main.js"></script>

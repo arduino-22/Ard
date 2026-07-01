@@ -10,8 +10,25 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <!-- ===== ФОРМА ВХОДА ===== -->
+    <div id="login-form" class="login-container">
+      <div class="login-nav">
+        <a href="index.html">🏠 На главную</a>
+        <a href="urok-5.html">← Урок 5</a>
+      </div>
+      <h2>🔐 Эксклюзивный урок 6</h2>
+      <p style="color: #7f8c8d; margin-bottom: 20px">
+        Введите пароль, полученный от учителя
+      </p>
+      <input type="password" id="passwordInput" placeholder="Введите пароль" />
+      <button onclick="checkPassword()">Войти</button>
+      <div id="errorMessage" class="error-message">
+        ❌ Неверный пароль. Попробуйте снова.
+      </div>
+    </div>
+
     <!-- ===== ЗАЩИЩЁННЫЙ КОНТЕНТ ===== -->
-    <div id="protected-content" class="encrypted-content">
+    <div id="protected-content" class="encrypted-content" style="display: none">
       <header>
         <div
           style="
@@ -31,26 +48,10 @@
         </div>
         <p><a href="index.html" style="color: #3498db">← На главную</a></p>
       </header>
-      <div
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        "
-      >
-        <h1>📘 Урок 1: Знакомство с WeDo 2.0</h1>
-        <button
-          id="themeToggle"
-          class="btn-theme-toggle"
-          aria-label="Переключить тему"
-        >
-          <i class="fas fa-moon"></i>
-        </button>
-      </div>
-      <p><a href="index.html" style="color: #3498db">← На главную</a></p>
 
       <section class="lesson-content">
         <h2>Тема: Программирование ESP8266 и создание веб-сервера</h2>
+
         <div class="example-card">
           <h3>🎯 Цель урока</h3>
           <p>
@@ -58,6 +59,7 @@
             собственный веб-сервер для управления устройствами через интернет.
           </p>
         </div>
+
         <div class="example-card">
           <h3>🧠 Что такое ESP8266?</h3>
           <p>
@@ -76,6 +78,7 @@
             5V! Не подключайте напрямую к 5V — это сожжёт микроконтроллер.
           </div>
         </div>
+
         <div class="example-card">
           <h3>🔧 Установка Arduino IDE для ESP8266</h3>
           <div class="step-card">
@@ -118,6 +121,7 @@
             </p>
           </div>
         </div>
+
         <div class="example-card">
           <h3>💻 Создание веб-сервера</h3>
           <p>Вот базовый код для создания веб-сервера на ESP8266:</p>
@@ -192,6 +196,7 @@
             IP-адрес ESP8266, который появится в мониторе порта.
           </div>
         </div>
+
         <div class="example-card">
           <h3>🔬 Практическое задание</h3>
           <ol>
@@ -209,6 +214,7 @@
             ESP8266!
           </p>
         </div>
+
         <div class="example-card">
           <h3>🤖 Дополнительные идеи</h3>
           <ul>
@@ -229,13 +235,14 @@
             </li>
           </ul>
         </div>
+
         <div class="lesson-navigation">
           <a href="urok-5.html">← Урок 5: Соревнование</a>
           <a href="urok-7.html">Урок 7: Конвертер →</a>
         </div>
       </section>
 
-      <footer>
+      <footer id="footer">
         <div class="footer-content">
           <p>
             © <span class="footer-year"></span> WeDo 2.0 Образовательная
@@ -249,39 +256,7 @@
       </footer>
     </div>
 
-    <!-- ===== ФОРМА ВХОДА ===== -->
-    <div id="login-form" class="login-container">
-      <a
-        href="index.html"
-        style="
-          display: inline-block;
-          margin-bottom: 15px;
-          color: #3498db;
-          text-decoration: none;
-          font-size: 16px;
-        "
-        >🏠 На главную</a
-      >
-      <h2>🔐 Эксклюзивный урок 6</h2>
-      <p style="color: #7f8c8d; margin-bottom: 20px">
-        Введите пароль, полученный от учителя
-      </p>
-      <input type="password" id="passwordInput" placeholder="Введите пароль" />
-      <button onclick="checkPassword()">Войти</button>
-      <div id="errorMessage" class="error-message">
-        ❌ Неверный пароль. Попробуйте снова.
-      </div>
-      <div
-        style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px"
-      >
-        <a
-          href="urok-5.html"
-          style="color: #7f8c8d; text-decoration: none; font-size: 14px"
-          >← Урок 5: Соревнование</a
-        >
-      </div>
-    </div>
-
+    <!-- ===== СКРИПТЫ ===== -->
     <script>
       const encodedPassword = "RVNQODI2Nl9Qcm9fMjAyNSE=";
       function checkPassword() {
@@ -293,10 +268,12 @@
         if (input.value === correct) {
           loginForm.style.display = "none";
           content.style.display = "block";
+          content.style.animation = "fadeIn 0.5s ease-out";
           sessionStorage.setItem("lesson6_access", "true");
         } else {
           error.style.display = "block";
           input.value = "";
+          input.focus();
           setTimeout(() => (error.style.display = "none"), 3000);
         }
       }

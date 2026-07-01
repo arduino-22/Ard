@@ -50,17 +50,332 @@
       </header>
 
       <section class="lesson-content">
-        <!-- ===== КОНТЕНТ УРОКА 7 (оставь свой) ===== -->
         <div class="example-card">
           <h3>🎯 Цель урока</h3>
           <p>
             Создать <strong>веб-сервер на ESP8266</strong>, который будет
             принимать данные с компьютера и конвертировать единицы измерения.
           </p>
-          <!-- ... остальной контент ... -->
+          <p>
+            В этом уроке ты соберёшь <strong>готовый скетч</strong>, загрузишь
+            его в ESP8266 и научишься передавать данные через Wi-Fi.
+          </p>
         </div>
-        <!-- ... -->
 
+        <div class="warning">
+          <strong>⚠️ Важно:</strong> Для этого урока тебе понадобятся:
+          <ul>
+            <li>Плата ESP8266 (NodeMCU, Wemos D1 или аналогичная)</li>
+            <li>USB-кабель для подключения к компьютеру</li>
+            <li>Установленная Arduino IDE (с поддержкой ESP8266)</li>
+          </ul>
+        </div>
+
+        <!-- ===== СКЕТЧ ДЛЯ ESP8266 ===== -->
+        <div class="example-card">
+          <h3>💻 Скетч для ESP8266</h3>
+          <p>Скопируй этот код в Arduino IDE и загрузи в плату:</p>
+
+          <button class="copy-btn" onclick="copySketch()">
+            📋 Скопировать скетч
+          </button>
+
+          <div class="code-block" id="sketchCode">
+            <span class="comment"
+              >/* ============================================================
+              Урок 7: ESP8266 + Конвертер единиц
+              ============================================================ Этот
+              скетч создаёт веб-сервер, который: 1. Принимает значение, единицу
+              измерения и направление 2. Конвертирует значение по запросу 3.
+              Возвращает результат в формате JSON Подключение: - ESP8266
+              подключается к Wi-Fi - Открывается веб-сервер на порту 80 -
+              Доступен по IP-адресу, который выводится в монитор порта
+              ============================================================
+              */</span
+            >
+
+            <span class="preprocessor"
+              >#include &lt;ESP8266WiFi.h&gt; #include
+              &lt;ESP8266WebServer.h&gt;</span
+            >
+
+            <span class="comment"
+              >// ===== НАСТРОЙКИ Wi-Fi (ЗАМЕНИ НА СВОИ!) =====</span
+            >
+            <span class="keyword">const char</span>* ssid =
+            <span class="string">"Ваш_WiFi_SSID"</span>;
+            <span class="keyword">const char</span>* password =
+            <span class="string">"Ваш_пароль_WiFi"</span>;
+
+            <span class="comment">// ===== СОЗДАЁМ СЕРВЕР =====</span>
+            ESP8266WebServer server(<span class="number">80</span>);
+
+            <span class="comment"
+              >// ===== КОНВЕРТАЦИЯ ЕДИНИЦ (базовая) =====</span
+            >
+            <span class="keyword">float</span> convertUnits(<span
+              class="keyword"
+              >float</span
+            >
+            value, <span class="keyword">String</span> from,
+            <span class="keyword">String</span> to) {
+            <span class="comment">// Длина</span>
+            <span class="keyword">if</span> (from ==
+            <span class="string">"м"</span> &amp;&amp; to ==
+            <span class="string">"см"</span>)
+            <span class="keyword">return</span> value *
+            <span class="number">100</span>;
+            <span class="keyword">if</span> (from ==
+            <span class="string">"см"</span> &amp;&amp; to ==
+            <span class="string">"м"</span>)
+            <span class="keyword">return</span> value /
+            <span class="number">100</span>;
+            <span class="keyword">if</span> (from ==
+            <span class="string">"м"</span> &amp;&amp; to ==
+            <span class="string">"мм"</span>)
+            <span class="keyword">return</span> value *
+            <span class="number">1000</span>;
+            <span class="keyword">if</span> (from ==
+            <span class="string">"мм"</span> &amp;&amp; to ==
+            <span class="string">"м"</span>)
+            <span class="keyword">return</span> value /
+            <span class="number">1000</span>;
+            <span class="keyword">if</span> (from ==
+            <span class="string">"км"</span> &amp;&amp; to ==
+            <span class="string">"м"</span>)
+            <span class="keyword">return</span> value *
+            <span class="number">1000</span>;
+            <span class="keyword">if</span> (from ==
+            <span class="string">"м"</span> &amp;&amp; to ==
+            <span class="string">"км"</span>)
+            <span class="keyword">return</span> value /
+            <span class="number">1000</span>;
+
+            <span class="comment">// Масса</span>
+            <span class="keyword">if</span> (from ==
+            <span class="string">"кг"</span> &amp;&amp; to ==
+            <span class="string">"г"</span>)
+            <span class="keyword">return</span> value *
+            <span class="number">1000</span>;
+            <span class="keyword">if</span> (from ==
+            <span class="string">"г"</span> &amp;&amp; to ==
+            <span class="string">"кг"</span>)
+            <span class="keyword">return</span> value /
+            <span class="number">1000</span>;
+            <span class="keyword">if</span> (from ==
+            <span class="string">"т"</span> &amp;&amp; to ==
+            <span class="string">"кг"</span>)
+            <span class="keyword">return</span> value *
+            <span class="number">1000</span>;
+            <span class="keyword">if</span> (from ==
+            <span class="string">"кг"</span> &amp;&amp; to ==
+            <span class="string">"т"</span>)
+            <span class="keyword">return</span> value /
+            <span class="number">1000</span>;
+
+            <span class="keyword">return</span> value; }
+
+            <span class="comment"
+              >// ===== ОБРАБОТЧИК ЗАПРОСА /convert =====</span
+            >
+            <span class="keyword">void</span>
+            <span class="function">handleConvert</span>() {
+            <span class="keyword">String</span> valueStr = server.arg(<span
+              class="string"
+              >"value"</span
+            >); <span class="keyword">String</span> from = server.arg(<span
+              class="string"
+              >"from"</span
+            >); <span class="keyword">String</span> to = server.arg(<span
+              class="string"
+              >"to"</span
+            >);
+
+            <span class="keyword">if</span> (valueStr ==
+            <span class="string">""</span> || from ==
+            <span class="string">""</span> || to ==
+            <span class="string">""</span>) { server.send(<span class="number"
+              >400</span
+            >, <span class="string">"text/plain"</span>,
+            <span class="string">"Ошибка: укажите value, from, to"</span>);
+            <span class="keyword">return</span>; }
+
+            <span class="keyword">float</span> value = valueStr.toFloat();
+            <span class="keyword">float</span> result = convertUnits(value,
+            from, to);
+
+            <span class="keyword">String</span> json =
+            <span class="string">"{\"result\":"</span> +
+            <span class="keyword">String</span>(result) +
+            <span class="string">",\"from\":\""</span> + from +
+            <span class="string">"\",\"to\":\""</span> + to +
+            <span class="string">"\"}"</span>; server.send(<span class="number"
+              >200</span
+            >, <span class="string">"application/json"</span>, json); }
+
+            <span class="comment"
+              >// ===== ГЛАВНАЯ СТРАНИЦА (простая) =====</span
+            >
+            <span class="keyword">void</span>
+            <span class="function">handleRoot</span>() {
+            <span class="keyword">String</span> html =
+            <span class="string"
+              >"&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta
+              charset='UTF-8'&gt;&lt;title&gt;ESP8266
+              Конвертер&lt;/title&gt;&lt;/head&gt;&lt;body&gt;"</span
+            >; html +=
+            <span class="string"
+              >"&lt;h1&gt;ESP8266 Конвертер единиц&lt;/h1&gt;"</span
+            >; html +=
+            <span class="string"
+              >"&lt;p&gt;Пример запроса:
+              &lt;code&gt;/convert?value=5&amp;from=м&amp;to=см&lt;/code&gt;&lt;/p&gt;"</span
+            >; html +=
+            <span class="string"
+              >"&lt;p&gt;Поддерживаемые единицы: м, см, мм, км, кг, г,
+              т&lt;/p&gt;"</span
+            >; html += <span class="string">"&lt;/body&gt;&lt;/html&gt;"</span>;
+            server.send(<span class="number">200</span>,
+            <span class="string">"text/html"</span>, html); }
+
+            <span class="comment">// ===== SETUP =====</span>
+            <span class="keyword">void</span>
+            <span class="function">setup</span>() { Serial.begin(<span
+              class="number"
+              >115200</span
+            >); delay(<span class="number">100</span>); Serial.print(<span
+              class="string"
+              >"Подключение к Wi-Fi"</span
+            >); WiFi.begin(ssid, password);
+
+            <span class="keyword">while</span> (WiFi.status() != WL_CONNECTED) {
+            delay(<span class="number">500</span>); Serial.print(<span
+              class="string"
+              >"."</span
+            >); } Serial.println(<span class="string">"\n✅ Подключено!"</span
+            >); Serial.print(<span class="string">"📡 IP-адрес: "</span>);
+            Serial.println(WiFi.localIP()); server.on(<span class="string"
+              >"/"</span
+            >, handleRoot); server.on(<span class="string">"/convert"</span>,
+            handleConvert); server.begin(); Serial.println(<span class="string"
+              >"🚀 Сервер запущен!"</span
+            >); }
+
+            <span class="comment">// ===== LOOP =====</span>
+            <span class="keyword">void</span>
+            <span class="function">loop</span>() { server.handleClient(); }
+          </div>
+
+          <div class="success-box">
+            <strong>✅ Готово!</strong> После загрузки скетча, открой монитор
+            порта, скопируй IP-адрес и перейди по нему в браузере.
+          </div>
+        </div>
+
+        <!-- ===== ПОШАГОВАЯ ИНСТРУКЦИЯ ===== -->
+        <div class="example-card">
+          <h3>📝 Пошаговая инструкция</h3>
+
+          <div class="step-card">
+            <h4><span class="step-number">1</span> Установи Arduino IDE</h4>
+            <p>
+              Скачай с
+              <a href="https://www.arduino.cc/en/software" target="_blank"
+                >arduino.cc</a
+              >
+              и установи.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <h4><span class="step-number">2</span> Добавь платформу ESP8266</h4>
+            <p>
+              В настройках добавь ссылку: <br />
+              <code
+                >https://arduino.esp8266.com/stable/package_esp8266com_index.json</code
+              ><br />
+              Затем установи пакет через менеджер плат.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <h4>
+              <span class="step-number">3</span> Подключи ESP8266 к компьютеру
+            </h4>
+            <p>
+              Используй USB-кабель. Выбери плату:
+              <strong>Инструменты → Плата → NodeMCU 1.0</strong> (или твою
+              модель).
+            </p>
+          </div>
+
+          <div class="step-card">
+            <h4><span class="step-number">4</span> Загрузи скетч</h4>
+            <p>
+              Скопируй код выше, вставь в Arduino IDE, замени
+              <strong>ssid</strong> и <strong>password</strong> на свои.
+            </p>
+            <p>Нажми <strong>Загрузить</strong> (стрелка вправо).</p>
+          </div>
+
+          <div class="step-card">
+            <h4><span class="step-number">5</span> Открой монитор порта</h4>
+            <p>
+              <strong>Инструменты → Монитор порта</strong>. Увидишь IP-адрес
+              ESP8266.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <h4><span class="step-number">6</span> Проверь работу</h4>
+            <p>
+              Введи в браузере: <br />
+              <code>http://[IP-адрес]/convert?value=5&from=м&to=см</code><br />
+              Должен прийти JSON-ответ:
+              <code>{"result":500,"from":"м","to":"см"}</code>
+            </p>
+          </div>
+        </div>
+
+        <!-- ===== ПРИМЕРЫ ЗАПРОСОВ ===== -->
+        <div class="example-card">
+          <h3>🧪 Примеры запросов</h3>
+          <ul>
+            <li>
+              <code>/convert?value=5&from=м&to=см</code> →
+              <strong>500</strong> (5 метров = 500 см)
+            </li>
+            <li>
+              <code>/convert?value=1000&from=г&to=кг</code> →
+              <strong>1</strong> (1000 г = 1 кг)
+            </li>
+            <li>
+              <code>/convert?value=2&from=км&to=м</code> →
+              <strong>2000</strong> (2 км = 2000 м)
+            </li>
+          </ul>
+        </div>
+
+        <!-- ===== ДОПОЛНИТЕЛЬНЫЕ ИДЕИ ===== -->
+        <div class="example-card">
+          <h3>🤖 Дополнительные идеи</h3>
+          <ul>
+            <li>
+              <strong>Добавь больше единиц</strong> — расширь функцию
+              <code>convertUnits()</code>
+            </li>
+            <li>
+              <strong>Сделай красивую HTML-страницу</strong> с формой для ввода
+            </li>
+            <li>
+              <strong>Подключи датчик</strong> — передавай его показания через
+              сервер
+            </li>
+            <li><strong>Сохраняй историю</strong> на SD-карте ESP8266</li>
+          </ul>
+        </div>
+
+        <!-- ===== НАВИГАЦИЯ ===== -->
         <div class="lesson-navigation">
           <a href="urok-6.html">← Урок 6: ESP8266 — основы</a>
           <a href="urok-8.html">Урок 8: Связь ESP8266 →</a>
@@ -114,7 +429,26 @@
         .addEventListener("keypress", function (e) {
           if (e.key === "Enter") checkPassword();
         });
+
+      // ===== КОПИРОВАНИЕ СКЕТЧА =====
+      function copySketch() {
+        const code = document.getElementById("sketchCode").innerText;
+        navigator.clipboard
+          .writeText(code)
+          .then(() => {
+            alert("✅ Скетч скопирован в буфер обмена!");
+          })
+          .catch(() => {
+            const range = document.createRange();
+            range.selectNode(document.getElementById("sketchCode"));
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+            alert("✅ Скетч скопирован!");
+          });
+      }
     </script>
+
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/main.js"></script>
